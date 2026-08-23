@@ -425,3 +425,14 @@ button {
 .footer a:hover {
     text-decoration: underline;
 }
+
+.disclaimer {
+    margin: 20px 0;
+    padding: 14px 16px;
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #555;
+}
