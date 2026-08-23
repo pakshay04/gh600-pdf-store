@@ -369,3 +369,59 @@ button {
         font-size: 36px;
     }
 }
+
+.legal-page {
+    width: min(850px, calc(100% - 32px));
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    line-height: 1.7;
+}
+
+.legal-page h1 {
+    margin-top: 0;
+}
+
+.legal-page h2 {
+    margin-top: 30px;
+}
+
+.legal-page a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.legal-page a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+
+    .legal-page {
+        padding: 25px;
+        margin: 25px auto;
+    }
+}
+
+
+.footer {
+    width: min(720px, calc(100% - 32px));
+    margin: 30px auto 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer a {
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
