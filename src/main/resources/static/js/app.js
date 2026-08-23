@@ -2,8 +2,8 @@
 // CUSTOMER APP
 // =====================================================
 
-// Change this to the database ID of your GH-600 PDF.
-const DEFAULT_PDF_ID = '123';
+// Your actual GH-600 PDF database ID
+const DEFAULT_PDF_ID = '2';
 
 const pdfId =
     new URLSearchParams(window.location.search).get('pdf')
@@ -14,12 +14,35 @@ const result = document.getElementById('result');
 const download = document.getElementById('download');
 const customerMessage = document.getElementById('customerMsg');
 
-const productTitle = document.getElementById('productTitle');
-const priceElement = document.getElementById('price');
+
+// =====================================================
+// HELPER - READ JSON SAFELY
+// =====================================================
+
+async function readJson(response) {
+
+    const text = await response.text();
+
+    if (!text) {
+        throw new Error(
+            `Server returned an empty response (HTTP ${response.status}).`
+        );
+    }
+
+    try {
+        return JSON.parse(text);
+    } catch (e) {
+        console.error("Server response:", text);
+
+        throw new Error(
+            `Server returned invalid JSON (HTTP ${response.status}).`
+        );
+    }
+}
 
 
 // =====================================================
-// LOAD PDF INFORMATION
+// CHECK PDF
 // =====================================================
 
 async function loadPdf() {
@@ -30,7 +53,7 @@ async function loadPdf() {
             '/api/pdfs/' + encodeURIComponent(pdfId)
         );
 
-        const data = await response.json();
+        const data = await readJson(response);
 
         if (!response.ok) {
             throw new Error(
@@ -38,19 +61,23 @@ async function loadPdf() {
             );
         }
 
-        productTitle.textContent =
-            data.filename || 'GH-600 Mock Questions';
+        console.log("PDF loaded:", data);
 
-        priceElement.textContent =
-            (data.pricePaise / 100).toFixed(0);
+        // Update price displayed on the page
+        if (data.pricePaise) {
 
-        pay.textContent =
-            'Buy & Download — ₹' +
-            (data.pricePaise / 100).toFixed(0);
+            const price =
+                (data.pricePaise / 100).toFixed(0);
+
+            pay.textContent =
+                'Buy & Download — ₹' + price;
+        }
 
         return data;
 
     } catch (error) {
+
+        console.error("PDF loading error:", error);
 
         customerMessage.textContent =
             error.message;
@@ -69,12 +96,13 @@ async function loadPdf() {
 pay.addEventListener('click', async () => {
 
     pay.disabled = true;
+
     customerMessage.textContent = '';
 
     try {
 
         // ---------------------------------------------
-        // Create Razorpay order
+        // CREATE RAZORPAY ORDER
         // ---------------------------------------------
 
         const orderResponse = await fetch(
@@ -85,7 +113,10 @@ pay.addEventListener('click', async () => {
             }
         );
 
-        const order = await orderResponse.json();
+        const order =
+            await readJson(orderResponse);
+
+        console.log("Order response:", order);
 
         if (!orderResponse.ok) {
 
@@ -97,7 +128,7 @@ pay.addEventListener('click', async () => {
 
 
         // ---------------------------------------------
-        // Razorpay Checkout
+        // CHECK RAZORPAY
         // ---------------------------------------------
 
         if (typeof Razorpay === 'undefined') {
@@ -107,6 +138,10 @@ pay.addEventListener('click', async () => {
             );
         }
 
+
+        // ---------------------------------------------
+        // RAZORPAY OPTIONS
+        // ---------------------------------------------
 
         const options = {
 
@@ -128,37 +163,38 @@ pay.addEventListener('click', async () => {
                 try {
 
                     // ---------------------------------
-                    // Verify payment on server
+                    // VERIFY PAYMENT
                     // ---------------------------------
 
-                    const verifyResponse = await fetch(
-                        '/api/payments/verify',
-                        {
-                            method: 'POST',
+                    const verifyResponse =
+                        await fetch(
+                            '/api/payments/verify',
+                            {
+                                method: 'POST',
 
-                            headers: {
-                                'Content-Type':
-                                    'application/json'
-                            },
+                                headers: {
+                                    'Content-Type':
+                                        'application/json'
+                                },
 
-                            body: JSON.stringify({
+                                body: JSON.stringify({
 
-                                razorpay_payment_id:
-                                    razorpayResponse.razorpay_payment_id,
+                                    razorpay_payment_id:
+                                        razorpayResponse.razorpay_payment_id,
 
-                                razorpay_order_id:
-                                    razorpayResponse.razorpay_order_id,
+                                    razorpay_order_id:
+                                        razorpayResponse.razorpay_order_id,
 
-                                razorpay_signature:
-                                    razorpayResponse.razorpay_signature
+                                    razorpay_signature:
+                                        razorpayResponse.razorpay_signature
 
-                            })
-                        }
-                    );
+                                })
+                            }
+                        );
 
 
                     const verification =
-                        await verifyResponse.json();
+                        await readJson(verifyResponse);
 
 
                     if (!verifyResponse.ok) {
@@ -171,8 +207,13 @@ pay.addEventListener('click', async () => {
 
 
                     // ---------------------------------
-                    // Payment successful
+                    // SUCCESS
                     // ---------------------------------
+
+                    console.log(
+                        "Payment verified:",
+                        verification
+                    );
 
                     download.href =
                         verification.downloadUrl;
@@ -185,6 +226,11 @@ pay.addEventListener('click', async () => {
                         'Payment successful. Your PDF is ready to download.';
 
                 } catch (error) {
+
+                    console.error(
+                        "Payment verification error:",
+                        error
+                    );
 
                     customerMessage.textContent =
                         error.message;
@@ -207,7 +253,9 @@ pay.addEventListener('click', async () => {
         };
 
 
-        // Open Razorpay
+        // ---------------------------------------------
+        // OPEN RAZORPAY
+        // ---------------------------------------------
 
         const razorpay =
             new Razorpay(options);
@@ -217,11 +265,15 @@ pay.addEventListener('click', async () => {
 
     } catch (error) {
 
+        console.error(
+            "Payment order error:",
+            error
+        );
+
         customerMessage.textContent =
             error.message;
 
         pay.disabled = false;
-
     }
 
 });
