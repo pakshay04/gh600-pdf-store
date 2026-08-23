@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,86 +14,10 @@
 <main class="page">
 
     <!-- ========================= -->
-    <!-- SELLER / ADMIN VIEW       -->
-    <!-- ========================= -->
-
-    <section id="seller">
-
-        <div class="admin-card">
-
-            <div class="brand">
-                <span class="badge">ADMIN</span>
-                <h1>PDF Store</h1>
-            </div>
-
-            <p class="muted">
-                Upload your GH-600 mock exam PDF and create a customer
-                purchase link.
-            </p>
-
-            <label class="drop">
-
-                <input id="file"
-                       type="file"
-                       accept=".pdf,application/pdf">
-
-                <span>📄 Choose PDF</span>
-
-            </label>
-
-            <p id="filename"
-               class="muted">
-            </p>
-
-            <label>
-                Price (₹)
-
-                <input id="price"
-                       type="number"
-                       min="1"
-                       step="1"
-                       value="499">
-            </label>
-
-            <button id="upload">
-                Upload &amp; Create Link
-            </button>
-
-
-            <section id="uploadResult"
-                     class="hidden success">
-
-                <h2>✅ PDF uploaded</h2>
-
-                <p>
-                    Share this purchase link with your customer:
-                </p>
-
-                <input id="link"
-                       class="url"
-                       readonly>
-
-                <button id="copy">
-                    Copy Link
-                </button>
-
-            </section>
-
-            <p id="sellerMsg"
-               class="message">
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- ========================= -->
     <!-- CUSTOMER VIEW             -->
     <!-- ========================= -->
 
-    <section id="customer"
-             class="hidden">
+    <section id="customer">
 
         <!-- Hero -->
 
@@ -118,21 +41,7 @@
                 designed to help you test and strengthen your
                 understanding of Agentic AI concepts.
             </p>
-            <section class="about-exam">
-                <h2>About the GH-600 Exam</h2>
 
-                <p>
-                    The GH-600 certification focuses on developing and working with
-                    <strong>agentic AI systems</strong>. It covers concepts such as
-                    agent architecture, tools, memory and state, evaluation,
-                    multi-agent coordination, and responsible AI guardrails.
-                </p>
-
-                <p>
-                    This mock exam is intended to help candidates practise these
-                    concepts and identify areas where additional study may be useful.
-                </p>
-            </section>
         </div>
 
 
@@ -148,7 +57,7 @@
                         PRACTICE EXAM
                     </span>
 
-                    <h2>
+                    <h2 id="productTitle">
                         GH-600 Mock Questions
                     </h2>
 
@@ -160,7 +69,7 @@
                         ₹
                     </span>
 
-                    <span class="price">
+                    <span id="price" class="price">
                         499
                     </span>
 
@@ -325,14 +234,13 @@
 
     <a href="/privacy.html">Privacy Policy</a>
 
-    <a href="/terms.html">Terms & Conditions</a>
+    <a href="/terms.html">Terms &amp; Conditions</a>
 
-    <a href="/refund.html">Refund & Cancellation</a>
+    <a href="/refund.html">Refund &amp; Cancellation</a>
 
     <a href="/contact.html">Contact Us</a>
 
 </footer>
 
 </body>
-
 </html>

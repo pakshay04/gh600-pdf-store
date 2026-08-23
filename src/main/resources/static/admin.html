@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>TechCertHub Admin</title>
+
+    <link rel="stylesheet"
+          href="/css/style.css">
+
+</head>
+
+<body>
+
+<main class="page">
+
+    <section id="seller">
+
+        <div class="admin-card">
+
+            <div class="brand">
+
+                <span class="badge">
+                    ADMIN
+                </span>
+
+                <h1>
+                    TechCertHub PDF Store
+                </h1>
+
+            </div>
+
+
+            <p class="muted">
+
+                Upload your GH-600 mock exam PDF
+                and create a customer purchase link.
+
+            </p>
+
+
+            <label class="drop">
+
+                <input id="file"
+                       type="file"
+                       accept=".pdf,application/pdf">
+
+                <span>
+                    📄 Choose PDF
+                </span>
+
+            </label>
+
+
+            <p id="filename"
+               class="muted">
+            </p>
+
+
+            <label>
+
+                Price (₹)
+
+                <input id="price"
+                       type="number"
+                       min="1"
+                       step="1"
+                       value="499">
+
+            </label>
+
+
+            <button id="upload">
+
+                Upload &amp; Create Link
+
+            </button>
+
+
+            <section id="uploadResult"
+                     class="hidden success">
+
+                <h2>
+                    ✅ PDF uploaded
+                </h2>
+
+                <p>
+                    Customer purchase link:
+                </p>
+
+
+                <input id="link"
+                       class="url"
+                       readonly>
+
+
+                <button id="copy">
+
+                    Copy Link
+
+                </button>
+
+            </section>
+
+
+            <p id="sellerMsg"
+               class="message">
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="/js/admin.js"></script>
+
+</body>
+
+</html>

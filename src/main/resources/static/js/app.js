@@ -1,597 +1,234 @@
+// =====================================================
+// CUSTOMER APP
+// =====================================================
+
+// Change this to the database ID of your GH-600 PDF.
+const DEFAULT_PDF_ID = '123';
+
 const pdfId =
-    new URLSearchParams(window.location.search).get('pdf');
+    new URLSearchParams(window.location.search).get('pdf')
+    || DEFAULT_PDF_ID;
 
-const seller =
-    document.getElementById('seller');
+const pay = document.getElementById('pay');
+const result = document.getElementById('result');
+const download = document.getElementById('download');
+const customerMessage = document.getElementById('customerMsg');
 
-const customer =
-    document.getElementById('customer');
-
-
-/* =========================================================
-   CUSTOMER PAGE
-   ========================================================= */
-
-if (pdfId) {
-
-    seller?.classList.add('hidden');
-    customer?.classList.remove('hidden');
-
-    const pay =
-        document.getElementById('pay');
-
-    const customerMessage =
-        document.getElementById('customerMsg');
-
-    const result =
-        document.getElementById('result');
-
-    const download =
-        document.getElementById('download');
+const productTitle = document.getElementById('productTitle');
+const priceElement = document.getElementById('price');
 
 
-    function showCustomerMessage(message) {
-        if (customerMessage) {
-            customerMessage.textContent = message;
-        } else {
-            console.error(message);
-        }
-    }
+// =====================================================
+// LOAD PDF INFORMATION
+// =====================================================
 
+async function loadPdf() {
 
-    if (!pay || !result || !download) {
+    try {
 
-        showCustomerMessage(
-            'Page configuration error. Please refresh the page.'
+        const response = await fetch(
+            '/api/pdfs/' + encodeURIComponent(pdfId)
         );
 
-    } else {
+        const data = await response.json();
 
-        /*
-         * Get the PDF information.
-         *
-         * We don't require customerFile/customerPrice
-         * because the GH-600 product information is already
-         * displayed in the HTML.
-         */
-
-        fetch(
-            '/api/pdfs/' +
-            encodeURIComponent(pdfId)
-        )
-
-        .then(async response => {
-
-            let data;
-
-            try {
-                data = await response.json();
-            } catch (e) {
-                throw new Error(
-                    'Invalid response from server.'
-                );
-            }
-
-            if (!response.ok) {
-                throw new Error(
-                    data.error || 'PDF not found.'
-                );
-            }
-
-            console.log(
-                'PDF loaded:',
-                data
+        if (!response.ok) {
+            throw new Error(
+                data.error || 'Product not found.'
             );
-
-
-            /*
-             * BUY & DOWNLOAD
-             */
-
-            pay.addEventListener(
-                'click',
-                async () => {
-
-                    pay.disabled = true;
-
-                    showCustomerMessage('');
-
-
-                    try {
-
-                        /*
-                         * STEP 1
-                         * Create Razorpay order
-                         */
-
-                        const orderResponse =
-                            await fetch(
-                                '/api/payments/order/' +
-                                encodeURIComponent(pdfId),
-                                {
-                                    method: 'POST'
-                                }
-                            );
-
-
-                        let order;
-
-                        try {
-                            order =
-                                await orderResponse.json();
-                        } catch (e) {
-                            throw new Error(
-                                'Invalid payment server response.'
-                            );
-                        }
-
-
-                        if (!orderResponse.ok) {
-
-                            throw new Error(
-                                order.error ||
-                                'Could not create payment order.'
-                            );
-                        }
-
-
-                        console.log(
-                            'Razorpay order:',
-                            order
-                        );
-
-
-                        /*
-                         * STEP 2
-                         * Check Razorpay Checkout
-                         */
-
-                        if (
-                            typeof Razorpay ===
-                            'undefined'
-                        ) {
-
-                            throw new Error(
-                                'Razorpay Checkout could not be loaded. ' +
-                                'Please check your internet connection.'
-                            );
-                        }
-
-
-                        /*
-                         * STEP 3
-                         * Open Razorpay
-                         */
-
-                        const options = {
-
-                            key:
-                                order.keyId,
-
-                            amount:
-                                order.amountPaise,
-
-                            currency:
-                                'INR',
-
-                            name:
-                                'GH-600 Mock Exam',
-
-                            description:
-                                '60 GH-600 Practice Questions',
-
-                            order_id:
-                                order.razorpayOrderId,
-
-
-                            handler:
-                                async function (
-                                    razorpayResponse
-                                ) {
-
-                                    console.log(
-                                        'Payment successful:',
-                                        razorpayResponse
-                                    );
-
-
-                                    try {
-
-                                        /*
-                                         * STEP 4
-                                         * Verify payment
-                                         * on Spring Boot server
-                                         */
-
-                                        const verifyResponse =
-                                            await fetch(
-                                                '/api/payments/verify',
-                                                {
-                                                    method: 'POST',
-
-                                                    headers: {
-                                                        'Content-Type':
-                                                            'application/json'
-                                                    },
-
-                                                    body:
-                                                        JSON.stringify({
-
-                                                            razorpay_payment_id:
-                                                                razorpayResponse
-                                                                    .razorpay_payment_id,
-
-                                                            razorpay_order_id:
-                                                                razorpayResponse
-                                                                    .razorpay_order_id,
-
-                                                            razorpay_signature:
-                                                                razorpayResponse
-                                                                    .razorpay_signature
-
-                                                        })
-                                                }
-                                            );
-
-
-                                        let verification;
-
-                                        try {
-
-                                            verification =
-                                                await verifyResponse
-                                                    .json();
-
-                                        } catch (e) {
-
-                                            throw new Error(
-                                                'Invalid payment verification response.'
-                                            );
-                                        }
-
-
-                                        if (
-                                            !verifyResponse.ok
-                                        ) {
-
-                                            throw new Error(
-                                                verification.error ||
-                                                'Payment verification failed.'
-                                            );
-                                        }
-
-
-                                        console.log(
-                                            'Payment verified:',
-                                            verification
-                                        );
-
-
-                                        /*
-                                         * STEP 5
-                                         * Show download button
-                                         */
-
-                                        download.href =
-                                            verification.downloadUrl;
-
-
-                                        result.classList
-                                            .remove('hidden');
-
-
-                                        pay.classList
-                                            .add('hidden');
-
-
-                                        showCustomerMessage('');
-
-                                    } catch (error) {
-
-                                        console.error(
-                                            'Verification error:',
-                                            error
-                                        );
-
-                                        showCustomerMessage(
-                                            error.message
-                                        );
-
-                                        pay.disabled =
-                                            false;
-                                    }
-                                },
-
-
-                            modal: {
-
-                                ondismiss:
-                                    function () {
-
-                                        pay.disabled =
-                                            false;
-                                    }
-                            }
-                        };
-
-
-                        const razorpay =
-                            new Razorpay(options);
-
-
-                        razorpay.open();
-
-
-                    } catch (error) {
-
-                        console.error(
-                            'Payment error:',
-                            error
-                        );
-
-                        showCustomerMessage(
-                            error.message
-                        );
-
-                        pay.disabled =
-                            false;
-                    }
-                }
-            );
-        })
-
-
-        .catch(error => {
-
-            console.error(
-                'PDF loading error:',
-                error
-            );
-
-            showCustomerMessage(
-                error.message
-            );
-        });
-    }
-
-
-/* =========================================================
-   SELLER / ADMIN PAGE
-   ========================================================= */
-
-} else {
-
-    seller?.classList.remove('hidden');
-    customer?.classList.add('hidden');
-
-
-    const fileInput =
-        document.getElementById('file');
-
-    const filename =
-        document.getElementById('filename');
-
-    const upload =
-        document.getElementById('upload');
-
-    const priceInput =
-        document.getElementById('price');
-
-    const uploadResult =
-        document.getElementById('uploadResult');
-
-    const link =
-        document.getElementById('link');
-
-    const copy =
-        document.getElementById('copy');
-
-    const sellerMessage =
-        document.getElementById('sellerMsg');
-
-
-    function showSellerMessage(message) {
-
-        if (sellerMessage) {
-            sellerMessage.textContent =
-                message;
-        } else {
-            console.error(message);
         }
+
+        productTitle.textContent =
+            data.filename || 'GH-600 Mock Questions';
+
+        priceElement.textContent =
+            (data.pricePaise / 100).toFixed(0);
+
+        pay.textContent =
+            'Buy & Download — ₹' +
+            (data.pricePaise / 100).toFixed(0);
+
+        return data;
+
+    } catch (error) {
+
+        customerMessage.textContent =
+            error.message;
+
+        pay.disabled = true;
+
+        throw error;
     }
+}
 
 
-    /*
-     * File selection
-     */
+// =====================================================
+// PAYMENT
+// =====================================================
 
-    fileInput?.addEventListener(
-        'change',
-        () => {
+pay.addEventListener('click', async () => {
 
-            if (filename) {
+    pay.disabled = true;
+    customerMessage.textContent = '';
 
-                filename.textContent =
-                    fileInput.files.length
-                        ? fileInput.files[0].name
-                        : '';
+    try {
+
+        // ---------------------------------------------
+        // Create Razorpay order
+        // ---------------------------------------------
+
+        const orderResponse = await fetch(
+            '/api/payments/order/' +
+            encodeURIComponent(pdfId),
+            {
+                method: 'POST'
             }
+        );
+
+        const order = await orderResponse.json();
+
+        if (!orderResponse.ok) {
+
+            throw new Error(
+                order.error ||
+                'Could not create payment order.'
+            );
         }
-    );
 
 
-    /*
-     * Upload PDF
-     */
+        // ---------------------------------------------
+        // Razorpay Checkout
+        // ---------------------------------------------
 
-    upload?.addEventListener(
-        'click',
-        async () => {
+        if (typeof Razorpay === 'undefined') {
 
-            showSellerMessage('');
-
-
-            if (
-                !fileInput ||
-                !fileInput.files.length
-            ) {
-
-                showSellerMessage(
-                    'Please select a PDF.'
-                );
-
-                return;
-            }
-
-
-            const price =
-                Number(priceInput.value);
-
-
-            if (
-                !price ||
-                price < 1
-            ) {
-
-                showSellerMessage(
-                    'Please enter a valid price.'
-                );
-
-                return;
-            }
-
-
-            const form =
-                new FormData();
-
-
-            form.append(
-                'file',
-                fileInput.files[0]
+            throw new Error(
+                'Razorpay Checkout could not be loaded.'
             );
+        }
 
 
-            form.append(
-                'pricePaise',
-                Math.round(price * 100)
-            );
+        const options = {
+
+            key: order.keyId,
+
+            amount: order.amountPaise,
+
+            currency: 'INR',
+
+            name: 'TechCertHub',
+
+            description: 'GH-600 Mock Exam',
+
+            order_id: order.razorpayOrderId,
 
 
-            upload.disabled = true;
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        '/api/pdfs/upload',
-                        {
-                            method: 'POST',
-                            body: form
-                        }
-                    );
-
-
-                let data;
+            handler: async function (razorpayResponse) {
 
                 try {
-                    data =
-                        await response.json();
-                } catch (e) {
-                    throw new Error(
-                        'Invalid server response.'
+
+                    // ---------------------------------
+                    // Verify payment on server
+                    // ---------------------------------
+
+                    const verifyResponse = await fetch(
+                        '/api/payments/verify',
+                        {
+                            method: 'POST',
+
+                            headers: {
+                                'Content-Type':
+                                    'application/json'
+                            },
+
+                            body: JSON.stringify({
+
+                                razorpay_payment_id:
+                                    razorpayResponse.razorpay_payment_id,
+
+                                razorpay_order_id:
+                                    razorpayResponse.razorpay_order_id,
+
+                                razorpay_signature:
+                                    razorpayResponse.razorpay_signature
+
+                            })
+                        }
                     );
+
+
+                    const verification =
+                        await verifyResponse.json();
+
+
+                    if (!verifyResponse.ok) {
+
+                        throw new Error(
+                            verification.error ||
+                            'Payment verification failed.'
+                        );
+                    }
+
+
+                    // ---------------------------------
+                    // Payment successful
+                    // ---------------------------------
+
+                    download.href =
+                        verification.downloadUrl;
+
+                    result.classList.remove('hidden');
+
+                    pay.classList.add('hidden');
+
+                    customerMessage.textContent =
+                        'Payment successful. Your PDF is ready to download.';
+
+                } catch (error) {
+
+                    customerMessage.textContent =
+                        error.message;
+
+                    pay.disabled = false;
+                }
+            },
+
+
+            modal: {
+
+                ondismiss: function () {
+
+                    pay.disabled = false;
+
                 }
 
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        data.error ||
-                        'Upload failed.'
-                    );
-                }
-
-
-                if (link) {
-
-                    link.value =
-                        window.location.origin +
-                        data.purchaseUrl;
-                }
-
-
-                uploadResult?.classList
-                    .remove('hidden');
-
-
-                showSellerMessage(
-                    'PDF uploaded successfully.'
-                );
-
-
-            } catch (error) {
-
-                console.error(
-                    'Upload error:',
-                    error
-                );
-
-                showSellerMessage(
-                    error.message
-                );
-
-            } finally {
-
-                upload.disabled =
-                    false;
-            }
-        }
-    );
-
-
-    /*
-     * Copy purchase link
-     */
-
-    copy?.addEventListener(
-        'click',
-        async () => {
-
-            if (!link) {
-                return;
             }
 
-
-            try {
-
-                await navigator
-                    .clipboard
-                    .writeText(link.value);
+        };
 
 
-                copy.textContent =
-                    'Copied!';
+        // Open Razorpay
+
+        const razorpay =
+            new Razorpay(options);
+
+        razorpay.open();
 
 
-                setTimeout(
-                    () => {
+    } catch (error) {
 
-                        copy.textContent =
-                            'Copy Link';
+        customerMessage.textContent =
+            error.message;
 
-                    },
-                    1500
-                );
+        pay.disabled = false;
+
+    }
+
+});
 
 
-            } catch (error) {
+// =====================================================
+// START
+// =====================================================
 
-                console.error(
-                    'Copy failed:',
-                    error
-                );
-            }
-        }
-    );
-}
+loadPdf();
