@@ -1,0 +1,14 @@
+.idea/
+*.iml
+target/
+data/
+.env
+.DS_Store
+
+
+# Environment / secrets
+application-local.properties
+
+uploads/
+
+*.log

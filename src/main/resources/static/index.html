@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GH-600 Mock Exam | Agentic AI Developer</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<main class="page">
+
+    <!-- ========================= -->
+    <!-- SELLER / ADMIN VIEW       -->
+    <!-- ========================= -->
+
+    <section id="seller">
+
+        <div class="admin-card">
+
+            <div class="brand">
+                <span class="badge">ADMIN</span>
+                <h1>PDF Store</h1>
+            </div>
+
+            <p class="muted">
+                Upload your GH-600 mock exam PDF and create a customer
+                purchase link.
+            </p>
+
+            <label class="drop">
+
+                <input id="file"
+                       type="file"
+                       accept=".pdf,application/pdf">
+
+                <span>📄 Choose PDF</span>
+
+            </label>
+
+            <p id="filename"
+               class="muted">
+            </p>
+
+            <label>
+                Price (₹)
+
+                <input id="price"
+                       type="number"
+                       min="1"
+                       step="1"
+                       value="499">
+            </label>
+
+            <button id="upload">
+                Upload &amp; Create Link
+            </button>
+
+
+            <section id="uploadResult"
+                     class="hidden success">
+
+                <h2>✅ PDF uploaded</h2>
+
+                <p>
+                    Share this purchase link with your customer:
+                </p>
+
+                <input id="link"
+                       class="url"
+                       readonly>
+
+                <button id="copy">
+                    Copy Link
+                </button>
+
+            </section>
+
+            <p id="sellerMsg"
+               class="message">
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- CUSTOMER VIEW             -->
+    <!-- ========================= -->
+
+    <section id="customer"
+             class="hidden">
+
+        <!-- Hero -->
+
+        <div class="hero">
+
+            <div class="exam-badge">
+                GH-600
+            </div>
+
+            <h1>
+                GH-600 Mock Exam
+            </h1>
+
+            <h2>
+                GitHub Certified: Agentic AI Developer
+            </h2>
+
+            <p class="hero-text">
+                Prepare for the GH-600 certification exam with
+                <strong>60 practice questions and answers</strong>
+                designed to help you test and strengthen your
+                understanding of Agentic AI concepts.
+            </p>
+
+        </div>
+
+
+        <!-- Product Card -->
+
+        <div class="product-card">
+
+            <div class="product-header">
+
+                <div>
+
+                    <span class="product-label">
+                        PRACTICE EXAM
+                    </span>
+
+                    <h2>
+                        GH-600 Mock Questions
+                    </h2>
+
+                </div>
+
+                <div class="price-box">
+
+                    <span class="currency">
+                        ₹
+                    </span>
+
+                    <span class="price">
+                        499
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- What's Included -->
+
+            <div class="features">
+
+                <h3>
+                    What's included
+                </h3>
+
+                <div class="feature">
+                    <span>✓</span>
+                    <p>
+                        <strong>60 practice questions</strong>
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <span>✓</span>
+                    <p>
+                        Answers included for every question
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <span>✓</span>
+                    <p>
+                        Questions covering key GH-600 topics
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <span>✓</span>
+                    <p>
+                        Scenario-based practice
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <span>✓</span>
+                    <p>
+                        Instant PDF download after payment
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- CTA -->
+
+            <div class="purchase">
+
+                <p class="purchase-text">
+                    Get the complete 60-question practice PDF
+                </p>
+
+                <button id="pay"
+                        class="buy-button">
+
+                    Buy &amp; Download — ₹499
+
+                </button>
+
+                <p class="secure">
+                    🔒 Secure payment via Razorpay
+                </p>
+
+            </div>
+
+
+            <!-- Payment Result -->
+
+            <section id="result"
+                     class="hidden success">
+
+                <h2>
+                    🎉 Payment successful!
+                </h2>
+
+                <p>
+                    Your GH-600 mock exam PDF is ready.
+                </p>
+
+                <a id="download"
+                   class="button download-button"
+                   href="#">
+
+                    Download Mock Exam PDF
+
+                </a>
+
+            </section>
+
+
+            <p id="customerMsg"
+               class="message">
+            </p>
+
+        </div>
+
+
+        <!-- About Exam -->
+
+        <section class="about">
+
+            <h2>
+                About the GH-600 Exam
+            </h2>
+
+            <p>
+                The GH-600 certification focuses on developing
+                and working with <strong>agentic AI systems</strong>.
+                It covers concepts such as agent architecture,
+                tools, memory and state, evaluation,
+                multi-agent coordination, and responsible
+                AI guardrails.
+            </p>
+
+            <p>
+                This mock exam is intended to help candidates
+                practise these concepts and identify areas
+                where additional study may be useful.
+            </p>
+
+        </section>
+
+
+        <!-- Disclaimer -->
+
+        <div class="disclaimer">
+
+            <strong>Disclaimer</strong>
+
+            <p>
+                This is an independent practice resource.
+                It is not an official GH-600 exam,
+                and it is not affiliated with, sponsored by,
+                or endorsed by GitHub or Microsoft.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Razorpay -->
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script src="/js/app.js"></script>
+
+</body>
+
+</html>
