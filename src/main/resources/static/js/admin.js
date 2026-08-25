@@ -88,15 +88,26 @@ upload.addEventListener('click', async () => {
 
     try {
 
+      const csrfToken =
+          await getCsrfToken();
+
+
       const response =
           await fetch(
               '/api/pdfs/upload',
               {
                   method: 'POST',
+
+                  credentials: 'same-origin',
+
+                  headers: {
+                      'X-XSRF-TOKEN':
+                          csrfToken
+                  },
+
                   body: form
               }
           );
-
 
         const data =
             await response.json();

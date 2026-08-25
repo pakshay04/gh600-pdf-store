@@ -2,13 +2,19 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Admin Login | TechCertHub</title>
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet"
+          href="/css/style.css">
+
 </head>
+
 
 <body>
 
@@ -17,17 +23,24 @@
     <section class="admin-card">
 
         <div class="brand">
-            <span class="badge">ADMIN</span>
-            <h1>TechCertHub</h1>
+
+            <span class="badge">
+                ADMIN
+            </span>
+
+            <h1>
+                TechCertHub
+            </h1>
+
         </div>
+
 
         <p class="muted">
             Sign in to manage your PDF products.
         </p>
 
-        <form action="/admin/login"
-              method="post"
-              id="loginForm">
+
+        <form id="loginForm">
 
             <label for="username">
                 Username
@@ -54,52 +67,139 @@
                     required>
 
 
-            <button type="submit">
+            <button type="submit"
+                    id="loginButton">
+
                 Login
+
             </button>
 
         </form>
 
+
         <p id="loginMessage"
            class="message">
-
-            <span id="errorMessage"></span>
-
         </p>
 
     </section>
 
 </main>
 
+
 <script>
 
-    const params =
-        new URLSearchParams(window.location.search);
+    async function getCsrfToken() {
 
-    const error =
-        params.get('error');
+        const response =
+            await fetch('/admin/csrf', {
+                credentials: 'same-origin'
+            });
 
-    const logout =
-        params.get('logout');
+        if (!response.ok) {
+            throw new Error(
+                'Unable to initialize secure login.'
+            );
+        }
 
-    const message =
-        document.getElementById('loginMessage');
+        const data =
+            await response.json();
 
-
-    if (error) {
-
-        message.textContent =
-            'Invalid username or password.';
-
+        return data.token;
     }
 
 
-    if (logout) {
+    document
+        .getElementById('loginForm')
+        .addEventListener('submit', async function(event) {
 
-        message.textContent =
-            'You have been logged out.';
+            event.preventDefault();
 
-    }
+            const button =
+                document.getElementById('loginButton');
+
+            const message =
+                document.getElementById('loginMessage');
+
+            button.disabled = true;
+
+            message.textContent = '';
+
+
+            try {
+
+                // Get CSRF token
+                const csrfToken =
+                    await getCsrfToken();
+
+
+                const username =
+                    document.getElementById('username').value;
+
+                const password =
+                    document.getElementById('password').value;
+
+
+                const body =
+                    new URLSearchParams();
+
+                body.append(
+                    'username',
+                    username
+                );
+
+                body.append(
+                    'password',
+                    password
+                );
+
+
+                const response =
+                    await fetch(
+                        '/admin/login',
+                        {
+                            method: 'POST',
+
+                            credentials: 'same-origin',
+
+                            headers: {
+                                'Content-Type':
+                                    'application/x-www-form-urlencoded',
+
+                                'X-XSRF-TOKEN':
+                                    csrfToken
+                            },
+
+                            body: body
+                        }
+                    );
+
+
+                if (response.ok || response.redirected) {
+
+                    window.location.href =
+                        '/admin.html';
+
+                    return;
+                }
+
+
+                message.textContent =
+                    'Invalid username or password.';
+
+                button.disabled = false;
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    error.message ||
+                    'Login failed.';
+
+                button.disabled = false;
+            }
+
+        });
 
 </script>
 
