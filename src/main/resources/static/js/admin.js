@@ -93,6 +93,9 @@ upload.addEventListener('click', async () => {
                 '/api/pdfs/upload',
                 {
                     method: 'POST',
+                    headers: {
+                        'X-Admin-Key': 'ADMIN_API_KEY'
+                    },
                     body: form
                 }
             );
