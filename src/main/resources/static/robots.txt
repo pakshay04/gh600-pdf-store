@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin.html
+Disallow: /admin-login.html
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://techcertshub.com/sitemap.xml
