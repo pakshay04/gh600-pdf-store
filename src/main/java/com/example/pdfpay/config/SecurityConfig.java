@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 public class SecurityConfig {
@@ -21,10 +22,12 @@ public class SecurityConfig {
     @Value("${ADMIN_PASSWORD}")
     private String adminPassword;
 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
     @Bean
     public UserDetailsService userDetailsService(
@@ -39,58 +42,116 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(admin);
     }
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http) throws Exception {
 
+        CookieCsrfTokenRepository csrfRepository =
+                CookieCsrfTokenRepository.withHttpOnlyFalse();
+
         http
+
+                // ==========================================
+                // CSRF
+                // ==========================================
+
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(csrfRepository)
+                )
+
+
+                // ==========================================
+                // AUTHORIZATION
+                // ==========================================
+
                 .authorizeHttpRequests(auth -> auth
 
-                        // Customer website
+                        // ------------------------------
+                        // Public website
+                        // ------------------------------
+
                         .requestMatchers(
                                 "/",
                                 "/index.html",
                                 "/css/**",
                                 "/js/app.js",
+
                                 "/privacy.html",
                                 "/terms.html",
                                 "/refund.html",
                                 "/contact.html",
-                                "/api/pdfs/**",
-                                "/api/payments/**",
-                                "/api/download/**"
+
+                                "/admin-login.html",
+                                "/admin/csrf"
                         ).permitAll()
 
+
+                        // ------------------------------
                         // Admin
+                        // ------------------------------
+
                         .requestMatchers(
                                 "/admin.html",
                                 "/js/admin.js",
                                 "/api/pdfs/upload"
                         ).hasRole("ADMIN")
 
+
+                        // ------------------------------
+                        // Customer
+                        // ------------------------------
+
+                        .requestMatchers(
+                                "/api/pdfs/**",
+                                "/api/payments/**",
+                                "/api/download/**"
+                        ).permitAll()
+
+
+                        // Everything else
                         .anyRequest().permitAll()
                 )
 
+
+                // ==========================================
+                // LOGIN
+                // ==========================================
+
                 .formLogin(form -> form
+
                         .loginPage("/admin-login.html")
+
                         .loginProcessingUrl("/admin/login")
-                        .defaultSuccessUrl("/admin.html", true)
-                        .failureUrl("/admin-login.html?error=true")
+
+                        .defaultSuccessUrl(
+                                "/admin.html",
+                                true
+                        )
+
+                        .failureUrl(
+                                "/admin-login.html?error=true"
+                        )
+
                         .permitAll()
                 )
+
+
+                // ==========================================
+                // LOGOUT
+                // ==========================================
 
                 .logout(logout -> logout
-                        .logoutUrl("/admin/logout")
-                        .logoutSuccessUrl("/admin-login.html")
-                        .permitAll()
-                )
 
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(
-                                "/api/payments/**",
-                                "/api/download/**"
+                        .logoutUrl("/admin/logout")
+
+                        .logoutSuccessUrl(
+                                "/admin-login.html?logout=true"
                         )
+
+                        .permitAll()
                 );
+
 
         return http.build();
     }

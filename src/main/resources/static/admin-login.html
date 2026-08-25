@@ -14,35 +14,45 @@
 
 <main class="page">
 
-    <div class="admin-card">
+    <section class="admin-card">
 
         <div class="brand">
             <span class="badge">ADMIN</span>
             <h1>TechCertHub</h1>
         </div>
 
-        <h2>Admin Login</h2>
+        <p class="muted">
+            Sign in to manage your PDF products.
+        </p>
 
-        <form method="post"
-              action="/admin/login">
+        <form action="/admin/login"
+              method="post"
+              id="loginForm">
 
-            <label>
+            <label for="username">
                 Username
-                <input
-                        type="text"
-                        name="username"
-                        required
-                        autocomplete="username">
             </label>
 
-            <label>
+            <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    autocomplete="username"
+                    required
+                    autofocus>
+
+
+            <label for="password">
                 Password
-                <input
-                        type="password"
-                        name="password"
-                        required
-                        autocomplete="current-password">
             </label>
+
+            <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    required>
+
 
             <button type="submit">
                 Login
@@ -50,20 +60,49 @@
 
         </form>
 
-        <p id="error" class="message"></p>
+        <p id="loginMessage"
+           class="message">
 
-    </div>
+            <span id="errorMessage"></span>
+
+        </p>
+
+    </section>
 
 </main>
 
 <script>
-    const params = new URLSearchParams(window.location.search);
 
-    if (params.get('error') === 'true') {
-        document.getElementById('error').textContent =
+    const params =
+        new URLSearchParams(window.location.search);
+
+    const error =
+        params.get('error');
+
+    const logout =
+        params.get('logout');
+
+    const message =
+        document.getElementById('loginMessage');
+
+
+    if (error) {
+
+        message.textContent =
             'Invalid username or password.';
+
     }
+
+
+    if (logout) {
+
+        message.textContent =
+            'You have been logged out.';
+
+    }
+
 </script>
 
 </body>
+
 </html>
