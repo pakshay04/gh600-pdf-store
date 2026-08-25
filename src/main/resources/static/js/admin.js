@@ -1,26 +1,40 @@
-const fileInput =
-    document.getElementById('file');
+// =====================================================
+// ADMIN APP
+// =====================================================
 
-const filename =
-    document.getElementById('filename');
+const fileInput = document.getElementById('file');
+const filename = document.getElementById('filename');
+const upload = document.getElementById('upload');
+const priceInput = document.getElementById('price');
+const uploadResult = document.getElementById('uploadResult');
+const link = document.getElementById('link');
+const copy = document.getElementById('copy');
+const sellerMessage = document.getElementById('sellerMsg');
 
-const upload =
-    document.getElementById('upload');
 
-const priceInput =
-    document.getElementById('price');
+// =====================================================
+// GET CSRF TOKEN
+// =====================================================
 
-const uploadResult =
-    document.getElementById('uploadResult');
+async function getCsrfToken() {
 
-const link =
-    document.getElementById('link');
+    const response = await fetch('/admin/csrf', {
+        method: 'GET',
+        credentials: 'same-origin'
+    });
 
-const copy =
-    document.getElementById('copy');
+    if (!response.ok) {
+        throw new Error('Unable to obtain CSRF token.');
+    }
 
-const sellerMessage =
-    document.getElementById('sellerMsg');
+    const data = await response.json();
+
+    if (!data.token) {
+        throw new Error('CSRF token was not returned by server.');
+    }
+
+    return data.token;
+}
 
 
 // =====================================================
@@ -54,9 +68,7 @@ upload.addEventListener('click', async () => {
     }
 
 
-    const price =
-        Number(priceInput.value);
-
+    const price = Number(priceInput.value);
 
     if (!price || price < 1) {
 
@@ -67,60 +79,90 @@ upload.addEventListener('click', async () => {
     }
 
 
-    const form =
-        new FormData();
-
-
-    form.append(
-        'file',
-        fileInput.files[0]
-    );
-
-
-    form.append(
-        'pricePaise',
-        Math.round(price * 100)
-    );
-
-
     upload.disabled = true;
 
 
     try {
 
-      const csrfToken =
-          await getCsrfToken();
+        // ---------------------------------------------
+        // Get CSRF token
+        // ---------------------------------------------
+
+        const csrfToken =
+            await getCsrfToken();
 
 
-      const response =
-          await fetch(
-              '/api/pdfs/upload',
-              {
-                  method: 'POST',
+        // ---------------------------------------------
+        // Prepare multipart form
+        // ---------------------------------------------
 
-                  credentials: 'same-origin',
+        const form = new FormData();
 
-                  headers: {
-                      'X-XSRF-TOKEN':
-                          csrfToken
-                  },
+        form.append(
+            'file',
+            fileInput.files[0]
+        );
 
-                  body: form
-              }
-          );
+        form.append(
+            'pricePaise',
+            Math.round(price * 100)
+        );
 
-        const data =
-            await response.json();
+
+        // ---------------------------------------------
+        // Upload PDF
+        // ---------------------------------------------
+
+        const response = await fetch(
+            '/api/pdfs/upload',
+            {
+                method: 'POST',
+
+                credentials: 'same-origin',
+
+                headers: {
+                    'X-XSRF-TOKEN': csrfToken
+                },
+
+                body: form
+            }
+        );
+
+
+        // ---------------------------------------------
+        // Read response safely
+        // ---------------------------------------------
+
+        const text =
+            await response.text();
+
+        let data = {};
+
+        if (text) {
+
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                throw new Error(
+                    'Server returned an invalid response.'
+                );
+            }
+        }
 
 
         if (!response.ok) {
 
             throw new Error(
                 data.error ||
+                data.message ||
                 'Upload failed.'
             );
         }
 
+
+        // ---------------------------------------------
+        // Purchase link
+        // ---------------------------------------------
 
         link.value =
             window.location.origin +
@@ -137,6 +179,11 @@ upload.addEventListener('click', async () => {
 
 
     } catch (error) {
+
+        console.error(
+            'Admin upload error:',
+            error
+        );
 
         sellerMessage.textContent =
             error.message;
