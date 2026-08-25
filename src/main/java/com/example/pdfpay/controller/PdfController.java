@@ -21,30 +21,31 @@ public class PdfController {
 
     @PostMapping("/upload")
     public ResponseEntity<?> upload(
-            @RequestHeader("X-Admin-Key") String adminKey,
             @RequestParam MultipartFile file,
             @RequestParam(required = false) Long pricePaise) {
 
-        String configuredKey = System.getenv("ADMIN_API_KEY");
-
-        if (configuredKey == null || !configuredKey.equals(adminKey)) {
-            return ResponseEntity.status(403)
-                    .body(Map.of("error", "Unauthorized"));
-        }
-
         try {
-            PdfDocument d = pdfService.upload(file, pricePaise);
 
-            return ResponseEntity.ok(Map.of(
-                    "id", d.getId(),
-                    "filename", d.getOriginalFilename(),
-                    "pricePaise", d.getPricePaise(),
-                    "purchaseUrl", "/?pdf=" + d.getId()
-            ));
+            PdfDocument d =
+                    pdfService.upload(file, pricePaise);
+
+            return ResponseEntity.ok(
+                    Map.of(
+                            "id", d.getId(),
+                            "filename", d.getOriginalFilename(),
+                            "pricePaise", d.getPricePaise(),
+                            "purchaseUrl",
+                            "/?pdf=" + d.getId()
+                    )
+            );
 
         } catch (Exception e) {
+
             return ResponseEntity.badRequest()
-                    .body(Map.of("error", e.getMessage()));
+                    .body(Map.of(
+                            "error",
+                            e.getMessage()
+                    ));
         }
     }
 

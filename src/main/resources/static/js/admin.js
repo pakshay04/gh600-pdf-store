@@ -88,17 +88,14 @@ upload.addEventListener('click', async () => {
 
     try {
 
-        const response =
-            await fetch(
-                '/api/pdfs/upload',
-                {
-                    method: 'POST',
-                    headers: {
-                        'X-Admin-Key': 'ADMIN_API_KEY'
-                    },
-                    body: form
-                }
-            );
+      const response =
+          await fetch(
+              '/api/pdfs/upload',
+              {
+                  method: 'POST',
+                  body: form
+              }
+          );
 
 
         const data =

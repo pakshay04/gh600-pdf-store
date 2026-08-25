@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | TechCertHub</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<main class="page">
+
+    <div class="admin-card">
+
+        <div class="brand">
+            <span class="badge">ADMIN</span>
+            <h1>TechCertHub</h1>
+        </div>
+
+        <h2>Admin Login</h2>
+
+        <form method="post"
+              action="/admin/login">
+
+            <label>
+                Username
+                <input
+                        type="text"
+                        name="username"
+                        required
+                        autocomplete="username">
+            </label>
+
+            <label>
+                Password
+                <input
+                        type="password"
+                        name="password"
+                        required
+                        autocomplete="current-password">
+            </label>
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <p id="error" class="message"></p>
+
+    </div>
+
+</main>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get('error') === 'true') {
+        document.getElementById('error').textContent =
+            'Invalid username or password.';
+    }
+</script>
+
+</body>
+</html>
