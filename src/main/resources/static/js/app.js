@@ -2,7 +2,7 @@
 // CUSTOMER APP
 // =====================================================
 
-// Your actual GH-600 PDF database ID
+// Actual GH-600 PDF database ID
 const DEFAULT_PDF_ID = '2';
 
 const pdfId =
@@ -16,7 +16,7 @@ const customerMessage = document.getElementById('customerMsg');
 
 
 // =====================================================
-// HELPER - READ JSON SAFELY
+// SAFE JSON READER
 // =====================================================
 
 async function readJson(response) {
@@ -25,24 +25,26 @@ async function readJson(response) {
 
     if (!text) {
         throw new Error(
-            `Server returned an empty response (HTTP ${response.status}).`
+            'Server returned an empty response. HTTP ' +
+            response.status
         );
     }
 
     try {
         return JSON.parse(text);
     } catch (e) {
-        console.error("Server response:", text);
+        console.error('Server response:', text);
 
         throw new Error(
-            `Server returned invalid JSON (HTTP ${response.status}).`
+            'Server returned invalid JSON. HTTP ' +
+            response.status
         );
     }
 }
 
 
 // =====================================================
-// CHECK PDF
+// LOAD PDF
 // =====================================================
 
 async function loadPdf() {
@@ -55,15 +57,15 @@ async function loadPdf() {
 
         const data = await readJson(response);
 
+        console.log('PDF response:', data);
+
         if (!response.ok) {
             throw new Error(
                 data.error || 'Product not found.'
             );
         }
 
-        console.log("PDF loaded:", data);
-
-        // Update price displayed on the page
+        // Update price on the existing Buy button
         if (data.pricePaise) {
 
             const price =
@@ -77,7 +79,7 @@ async function loadPdf() {
 
     } catch (error) {
 
-        console.error("PDF loading error:", error);
+        console.error('PDF loading error:', error);
 
         customerMessage.textContent =
             error.message;
@@ -96,7 +98,6 @@ async function loadPdf() {
 pay.addEventListener('click', async () => {
 
     pay.disabled = true;
-
     customerMessage.textContent = '';
 
     try {
@@ -116,7 +117,7 @@ pay.addEventListener('click', async () => {
         const order =
             await readJson(orderResponse);
 
-        console.log("Order response:", order);
+        console.log('Order response:', order);
 
         if (!orderResponse.ok) {
 
@@ -140,7 +141,7 @@ pay.addEventListener('click', async () => {
 
 
         // ---------------------------------------------
-        // RAZORPAY OPTIONS
+        // RAZORPAY CHECKOUT
         // ---------------------------------------------
 
         const options = {
@@ -187,7 +188,6 @@ pay.addEventListener('click', async () => {
 
                                     razorpay_signature:
                                         razorpayResponse.razorpay_signature
-
                                 })
                             }
                         );
@@ -211,7 +211,7 @@ pay.addEventListener('click', async () => {
                     // ---------------------------------
 
                     console.log(
-                        "Payment verified:",
+                        'Payment verified:',
                         verification
                     );
 
@@ -228,7 +228,7 @@ pay.addEventListener('click', async () => {
                 } catch (error) {
 
                     console.error(
-                        "Payment verification error:",
+                        'Payment verification error:',
                         error
                     );
 
@@ -247,9 +247,7 @@ pay.addEventListener('click', async () => {
                     pay.disabled = false;
 
                 }
-
             }
-
         };
 
 
@@ -262,11 +260,10 @@ pay.addEventListener('click', async () => {
 
         razorpay.open();
 
-
     } catch (error) {
 
         console.error(
-            "Payment order error:",
+            'Payment order error:',
             error
         );
 
