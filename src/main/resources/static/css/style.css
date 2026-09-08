@@ -21,3 +21,45 @@
 .community-home-cta .section-heading{align-items:center}
 .community-home-cta h2{margin-bottom:8px}
 .community-home-cta p{max-width:720px;margin:0}
+.legal-page {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 42px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.legal-page h1 {
+    font-size: 42px;
+    letter-spacing: -1.5px;
+    margin: 0 0 12px;
+}
+
+.legal-page h2 {
+    font-size: 24px;
+    margin: 34px 0 10px;
+}
+
+.legal-page p {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.legal-page a {
+    color: var(--purple);
+    font-weight: 700;
+}
+
+@media (max-width: 600px) {
+    .legal-page {
+        margin: 25px 16px;
+        padding: 25px 20px;
+    }
+
+    .legal-page h1 {
+        font-size: 32px;
+    }
+}

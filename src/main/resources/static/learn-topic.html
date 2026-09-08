@@ -1,12 +1,347 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Free Study Materials | TechCertHub</title><meta name="description" content="Deep free study materials, roadmaps, notes, examples, projects, interview questions and quizzes for developers and AI learners."><link rel="stylesheet" href="/css/style.css"></head><body><header class="topbar"><a class="logo" href="/"><span>TC</span> TechCertHub</a><nav><a href="/certifications.html">Certifications</a><a href="/learn.html">Learn</a><a href="/quizzes.html">Quick Quizzes</a><a href="/community.html">Community</a><a class="nav-cta" href="/store.html">Premium Materials</a></nav><button class="menu" onclick="document.body.classList.toggle('nav-open')">☰</button></header><main class="learning-shell" id="topicPage"></main><footer><div><a class="logo" href="/"><span>TC</span> TechCertHub</a><p>Free-first developer learning.</p></div><div><b>Explore</b><a href="/certifications.html">Certifications</a><a href="/learn.html">Programming & AI</a><a href="/quizzes.html">Quick Quizzes</a><a href="/store.html">Premium Materials</a></div><div><b>Company</b><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div></footer><script>const topics=JSON.parse("{\"java\":{\"name\":\"Java\",\"eyebrow\":\"PROGRAMMING\",\"icon\":\"☕\",\"tone\":\"orange\",\"tagline\":\"Master Java from fundamentals to production-ready backend development.\",\"roadmap\":[[\"01\",\"Core Java\",\"Syntax, types, operators, control flow, arrays and strings.\"],[\"02\",\"OOP\",\"Classes, objects, inheritance, interfaces, abstraction and polymorphism.\"],[\"03\",\"Collections\",\"List, Set, Map, generics and choosing the right collection.\"],[\"04\",\"Functional Java\",\"Lambdas, functional interfaces, Optional and method references.\"],[\"05\",\"Streams\",\"Map, filter, reduce, collectors, grouping and stream design.\"],[\"06\",\"Exceptions & I/O\",\"Checked vs unchecked exceptions, files, NIO and resource management.\"],[\"07\",\"Concurrency & JVM\",\"Threads, executors, synchronization, memory model and JVM basics.\"],[\"08\",\"Testing & Spring Boot\",\"JUnit, mocking, REST APIs, dependency injection and production patterns.\"]],\"notes\":[[\"Variables & Types\",\"Understand primitives vs references, numeric types, boolean, char, casting, scope and the difference between a value and an object reference.\"],[\"Classes & Objects\",\"A class defines state and behavior; objects are instances. Practice constructors, fields, methods, access modifiers and composition.\"],[\"Inheritance & Polymorphism\",\"Prefer composition when reuse is about behavior. Use inheritance when the subtype truly satisfies the parent contract.\"],[\"Collections\",\"Use List for ordered duplicates, Set for uniqueness and Map for key-value lookup. Know ArrayList, HashSet and HashMap trade-offs.\"],[\"Generics\",\"Generics provide compile-time type safety and reusable APIs. Learn bounded types, wildcards and the difference between ? extends and ? super.\"],[\"Streams\",\"A stream pipeline usually has a source, intermediate operations and a terminal operation. Avoid hidden side effects inside pipelines.\"],[\"Concurrency\",\"Use executors instead of manually managing many threads. Protect shared mutable state or design ownership so sharing is minimized.\"],[\"Testing\",\"Unit tests should be fast and focused. Add integration tests around persistence, HTTP boundaries and important framework behavior.\"]],\"code\":\"List<String> names = List.of(\\\"Ana\\\", \\\"Ben\\\", \\\"Cara\\\");\\nlong count = names.stream()\\n    .filter(n -> n.length() > 3)\\n    .count();\\nSystem.out.println(count);\",\"project\":\"Build a task-management REST API with CRUD, validation, persistence, pagination and tests.\",\"interview\":[\"Explain == vs equals().\",\"Why should equals() and hashCode() agree?\",\"ArrayList vs LinkedList?\",\"HashMap vs ConcurrentHashMap?\",\"What is dependency injection?\",\"Checked vs unchecked exceptions?\",\"What does volatile guarantee?\",\"What is the purpose of the JVM?\"]},\"python\":{\"name\":\"Python\",\"eyebrow\":\"PROGRAMMING\",\"icon\":\"🐍\",\"tone\":\"blue\",\"tagline\":\"Learn Python for scripting, APIs, automation, data and AI.\",\"roadmap\":[[\"01\",\"Python Fundamentals\",\"Variables, strings, numbers, lists, tuples, sets, dictionaries and control flow.\"],[\"02\",\"Functions\",\"Arguments, scope, return values, comprehensions, generators and decorators.\"],[\"03\",\"OOP & Modules\",\"Classes, composition, inheritance, modules, packages and clean project structure.\"],[\"04\",\"Files & Data\",\"Pathlib, JSON, CSV, serialization, exceptions and resource handling.\"],[\"05\",\"APIs & Web\",\"HTTP, requests, REST APIs, authentication, retries and timeouts.\"],[\"06\",\"Testing & Quality\",\"pytest concepts, fixtures, mocking, typing, linting and packaging.\"],[\"07\",\"Async & Performance\",\"Iterators, async/await, concurrency choices and profiling basics.\"],[\"08\",\"Python for AI\",\"Data preparation, notebooks, model APIs, embeddings and reliable AI workflows.\"]],\"notes\":[[\"Data Structures\",\"Lists are mutable sequences, tuples are immutable sequences, sets model uniqueness, and dictionaries map keys to values.\"],[\"Functions\",\"Keep functions focused. Use explicit inputs and return values instead of hidden global state.\"],[\"Comprehensions\",\"Use comprehensions for simple transformations and filters; use a normal loop when the logic becomes difficult to read.\"],[\"Exceptions\",\"Catch specific exceptions, add useful context and avoid catching Exception broadly unless you can handle it safely.\"],[\"Virtual Environments\",\"Use an isolated environment per project so dependencies do not conflict. Record dependencies in pyproject.toml or requirements files.\"],[\"Generators\",\"Generators produce values lazily, reducing memory use for large sequences. Understand yield and iterator protocol.\"],[\"Testing\",\"Test business behavior and edge cases. Keep tests deterministic and isolate external services behind boundaries.\"],[\"AI Applications\",\"Validate model outputs, handle API failures and keep secrets outside source code. Build evaluation cases before optimizing prompts.\"]],\"code\":\"def normalize_names(names):\\n    return [name.strip().title() for name in names if name.strip()]\\n\\nprint(normalize_names([\\\" ana \\\", \\\"ben\\\"]))\",\"project\":\"Build a CLI expense tracker that stores JSON, validates input and exposes a small REST API.\",\"interview\":[\"List vs tuple?\",\"What is a dictionary?\",\"What is a generator?\",\"How does a virtual environment help?\",\"What is a decorator?\",\"When would you use async/await?\",\"How should Python exceptions be handled?\",\"How would you structure a Python project?\"]},\"react\":{\"name\":\"React\",\"eyebrow\":\"FRONTEND\",\"icon\":\"⚛\",\"tone\":\"purple\",\"tagline\":\"Build modern React interfaces with components, state, hooks and APIs.\",\"roadmap\":[[\"01\",\"Components & JSX\",\"Components, JSX, props, composition and conditional rendering.\"],[\"02\",\"State & Events\",\"State, event handlers, controlled inputs and lifting state.\"],[\"03\",\"Lists & Forms\",\"Keys, forms, validation, derived state and reusable form components.\"],[\"04\",\"Hooks\",\"useState, useEffect, useMemo, useCallback and custom hooks.\"],[\"05\",\"Data & APIs\",\"Fetching, loading/error states, caching concepts and API boundaries.\"],[\"06\",\"Routing & UX\",\"Routing, navigation, accessibility, responsive layouts and empty states.\"],[\"07\",\"Performance\",\"Rendering behavior, memoization, code splitting and avoiding premature optimization.\"],[\"08\",\"Testing & Production\",\"Component tests, build pipelines, environment configuration and deployment.\"]],\"notes\":[[\"Components\",\"Keep components focused and compose smaller pieces. A component should have a clear responsibility and predictable inputs.\"],[\"Props\",\"Props are inputs passed from a parent. Treat them as read-only and use callbacks when a child needs to request a change.\"],[\"State\",\"Store the minimum state needed. Derive values from existing state rather than duplicating them.\"],[\"Effects\",\"Use effects to synchronize with external systems. Do not use an effect for calculations that can happen during render.\"],[\"Keys\",\"Give list items stable keys based on identity, not array position when items can be reordered or removed.\"],[\"Forms\",\"Controlled inputs make form state explicit. Validate early and give useful error and loading feedback.\"],[\"Data Fetching\",\"Model loading, success, empty and error states. Avoid race conditions when requests can overlap.\"],[\"Performance\",\"Measure first. Reduce unnecessary renders, large bundles and expensive calculations before adding memoization.\"]],\"code\":\"function Greeting({ name }) {\\n  return <h2>Hello, {name}!</h2>;\\n}\\n\\nexport default function App() {\\n  return <Greeting name=\\\"TechCertHub\\\" />;\\n}\",\"project\":\"Build a certification dashboard with search, filters, quiz progress, loading/error states and responsive cards.\",\"interview\":[\"What are props?\",\"Why are keys important?\",\"When should you use useEffect?\",\"What is lifting state up?\",\"Controlled vs uncontrolled input?\",\"What is a custom hook?\",\"When does memoization help?\",\"How would you test a React component?\"]},\"ai\":{\"name\":\"AI & Generative AI\",\"eyebrow\":\"ARTIFICIAL INTELLIGENCE\",\"icon\":\"✦\",\"tone\":\"purple\",\"tagline\":\"Understand LLM applications, prompting, RAG, tools, agents and evaluation.\",\"roadmap\":[[\"01\",\"AI Foundations\",\"Tokens, context windows, models, inference, embeddings and common failure modes.\"],[\"02\",\"Prompt Engineering\",\"Instructions, context, examples, structured outputs and prompt testing.\"],[\"03\",\"Embeddings\",\"Semantic representations, similarity search and choosing retrieval signals.\"],[\"04\",\"RAG\",\"Chunking, indexing, retrieval, reranking, citations and grounded generation.\"],[\"05\",\"Tool Use\",\"Function/tool calling, schemas, validation, permissions and failure handling.\"],[\"06\",\"Agents & Workflows\",\"Deterministic workflows, agent loops, state, memory and guardrails.\"],[\"07\",\"Evaluation\",\"Golden sets, quality metrics, regression tests, observability and human review.\"],[\"08\",\"Production AI\",\"Latency, cost, privacy, prompt injection, fallbacks and responsible deployment.\"]],\"notes\":[[\"LLMs\",\"A language model predicts tokens from context. Application quality depends on model choice, instructions, context, tools, data and evaluation—not just model size.\"],[\"Prompt Design\",\"Specify the task, relevant context, constraints and output format. Test prompts against representative examples instead of relying on one successful response.\"],[\"Structured Output\",\"Use explicit schemas when downstream code needs reliable fields. Validate the result before using it.\"],[\"Embeddings\",\"Embeddings map text or other data into vectors where related items tend to be close. Retrieval quality depends on chunking, indexing and query design.\"],[\"RAG\",\"Retrieval-augmented generation supplies retrieved evidence to generation. Track retrieval quality separately from answer quality.\"],[\"Tool Calling\",\"Treat tools as controlled operations. Validate arguments, apply least-privilege permissions and handle tool failures explicitly.\"],[\"Evaluation\",\"Build a representative test set and define measurable criteria. Run it after changing prompts, models, retrieval or application logic.\"],[\"Safety\",\"Consider prompt injection, data leakage, unsafe tool calls and overconfident answers. Add boundaries, logging and human review where risk warrants it.\"]],\"code\":\"const result = await client.messages.create({\\n  model: \\\"your-model\\\",\\n  max_tokens: 300,\\n  messages: [{ role: \\\"user\\\", content: \\\"Summarize this document in 5 bullets.\\\" }]\\n});\",\"project\":\"Build a document Q&A assistant with retrieval, citations, evaluation cases and a safe fallback when evidence is missing.\",\"interview\":[\"What is RAG?\",\"What is an embedding?\",\"How do you evaluate an LLM app?\",\"What is prompt injection?\",\"When should you use tool calling?\",\"What is a context window?\",\"How can you reduce hallucinations?\",\"When should an AI workflow use human review?\"]},\"sql\":{\"name\":\"SQL\",\"eyebrow\":\"DATABASE\",\"icon\":\"⌘\",\"tone\":\"dark\",\"tagline\":\"Go from SELECT basics to analytical queries and performance.\",\"roadmap\":[[\"01\",\"Query Basics\",\"SELECT, WHERE, ORDER BY, LIMIT, NULL and expressions.\"],[\"02\",\"Data Modeling\",\"Primary keys, foreign keys, normalization and relationships.\"],[\"03\",\"Joins\",\"INNER, LEFT, RIGHT concepts, join conditions and duplicate rows.\"],[\"04\",\"Aggregation\",\"GROUP BY, HAVING, COUNT, SUM, AVG and conditional aggregation.\"],[\"05\",\"CTEs & Subqueries\",\"Common table expressions, correlated subqueries and readable query design.\"],[\"06\",\"Window Functions\",\"PARTITION BY, ranking, running totals and comparisons without collapsing rows.\"],[\"07\",\"Transactions\",\"ACID concepts, isolation, commits, rollbacks and concurrency issues.\"],[\"08\",\"Indexes & Performance\",\"Indexes, query plans, pagination and avoiding unnecessary work.\"]],\"notes\":[[\"SELECT\",\"Start with the smallest query that proves the data you need. Add filtering, sorting and projection deliberately.\"],[\"NULL\",\"NULL means unknown/missing, not zero or an empty string. Learn IS NULL, COALESCE and three-valued logic.\"],[\"Joins\",\"Understand which rows each join preserves before writing it. Check for one-to-many relationships that can multiply rows.\"],[\"Aggregation\",\"WHERE filters rows before grouping; HAVING filters groups after aggregation.\"],[\"CTEs\",\"CTEs can make multi-step queries easier to read. Keep each step focused and name it by business meaning.\"],[\"Window Functions\",\"Window functions calculate across related rows while preserving row-level results.\"],[\"Transactions\",\"Transactions group related changes so the database can preserve consistency. Know commit, rollback and isolation trade-offs.\"],[\"Indexes\",\"Indexes can speed reads but add storage and write overhead. Use execution plans and measurements before optimizing.\"]],\"code\":\"SELECT department,\\n       COUNT(*) AS employees,\\n       AVG(salary) AS avg_salary\\nFROM employees\\nGROUP BY department\\nHAVING COUNT(*) >= 5\\nORDER BY avg_salary DESC;\",\"project\":\"Design an employee database and create reports for hiring, salary bands, department counts and top performers.\",\"interview\":[\"INNER JOIN vs LEFT JOIN?\",\"WHERE vs HAVING?\",\"What is a window function?\",\"What is normalization?\",\"What is a transaction?\",\"What is an index?\",\"Why can a join duplicate rows?\",\"How would you investigate a slow query?\"]},\"spring\":{\"name\":\"Spring Boot\",\"eyebrow\":\"BACKEND\",\"icon\":\"◆\",\"tone\":\"green\",\"tagline\":\"Build clean, tested Spring Boot APIs for real applications.\",\"roadmap\":[[\"01\",\"Boot Basics\",\"Application structure, configuration, profiles, beans and dependency injection.\"],[\"02\",\"REST APIs\",\"Controllers, DTOs, validation, exception handling and HTTP semantics.\"],[\"03\",\"Persistence\",\"JPA entities, repositories, relationships, transactions and pagination.\"],[\"04\",\"Security\",\"Authentication, authorization, password handling and secure API boundaries.\"],[\"05\",\"Testing\",\"Unit tests, MockMvc, integration tests, test data and reliable fixtures.\"],[\"06\",\"Observability\",\"Logging, metrics, tracing concepts, health checks and useful diagnostics.\"],[\"07\",\"Configuration\",\"Profiles, environment variables, secrets, externalized configuration and deployment.\"],[\"08\",\"Production Patterns\",\"Layering, error contracts, resilience, documentation and container deployment.\"]],\"notes\":[[\"Dependency Injection\",\"Let Spring manage dependencies so classes depend on abstractions and can be tested independently.\"],[\"Controllers\",\"Controllers should handle HTTP concerns and delegate business rules to services. Keep them thin.\"],[\"DTOs\",\"Use request/response DTOs to avoid exposing persistence models directly at API boundaries.\"],[\"Validation\",\"Validate inputs at the boundary and return consistent error responses. Keep validation rules close to the contract.\"],[\"JPA\",\"Understand entity identity, lazy loading, relationships and transaction boundaries before optimizing queries.\"],[\"Security\",\"Protect credentials and secrets, validate authorization at the server and apply least privilege.\"],[\"Testing\",\"Use focused unit tests plus integration tests for important framework/database behavior.\"],[\"Configuration\",\"Keep environment-specific values outside source code. Use profiles and environment variables for deployment configuration.\"]],\"code\":\"@RestController\\n@RequestMapping(\\\"/api/tasks\\\")\\nclass TaskController {\\n  @GetMapping\\n  List<TaskDto> all() { return service.findAll(); }\\n}\",\"project\":\"Build a secure task-management REST API with CRUD, validation, persistence, authentication, tests and API documentation.\",\"interview\":[\"What is dependency injection?\",\"Controller vs service?\",\"Why use DTOs?\",\"What is @Transactional?\",\"How does Spring Security authenticate?\",\"Unit vs integration tests?\",\"How should secrets be configured?\",\"How would you design consistent API errors?\"]}");
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-const key=(new URLSearchParams(location.search).get('topic')||'java').toLowerCase(); const t=topics[key]||topics.java; document.title=`Free ${t.name} Study Materials | TechCertHub`;
-const page=document.getElementById('topicPage');
-page.innerHTML=`<section class="topic-hero"><div class="topic-hero-glow"></div><div class="topic-hero-main"><div class="eyebrow">${esc(t.eyebrow)} · FREE LEARNING</div><div class="topic-title-row"><div class="big-topic-icon ${esc(t.tone)}">${t.icon}</div><div><h1>${esc(t.name)}</h1><p>${esc(t.tagline)}</p></div></div><div class="hero-pills"><span>✓ Free notes</span><span>✓ Practical examples</span><span>✓ Projects</span><span>✓ Interview prep</span><span>✓ Quiz</span></div></div><div class="topic-progress"><div class="progress-top"><span>Your path</span><b>0 / ${t.roadmap.length} modules</b></div><div class="progress-track"><i id="progressBar"></i></div><p>Work through the modules at your own pace. Your browser remembers completed lessons.</p><a class="btn primary" href="/quizzes.html?topic=${encodeURIComponent(t.name)}">Take free quiz →</a></div></section><div class="topic-layout"><aside class="topic-side"><div class="side-card"><b>On this page</b><a href="#roadmap">Learning roadmap</a><a href="#notes">Study notes</a><a href="#code">Code example</a><a href="#practice">Practice & project</a><a href="#interview">Interview prep</a></div><div class="side-card side-purple"><b>Need more?</b><p>Use the free content first, then compare premium practice packs.</p><a href="/store.html">Explore materials →</a></div></aside><div class="topic-content"><section id="roadmap" class="content-section"><div class="section-heading"><div><div class="eyebrow">01 · ROADMAP</div><h2>Learn step by step</h2><p>Eight focused modules take you from foundations to practical development.</p></div><span class="section-count">${t.roadmap.length} modules</span></div><div class="module-grid">${t.roadmap.map((x,i)=>`<button class="module-card material-trigger" data-type="roadmap" data-index="${i}"><span class="module-number">${esc(x[0])}</span><span class="module-copy"><b>${esc(x[1])}</b><small>${esc(x[2])}</small></span><span class="module-arrow">→</span></button>`).join('')}</div></section><section id="notes" class="content-section"><div class="section-heading"><div><div class="eyebrow">02 · STUDY NOTES</div><h2>Core concepts, explained</h2><p>Short notes designed for quick revision, followed by practice.</p></div><div class="note-search"><input id="noteSearch" placeholder="Search notes…" aria-label="Search notes"></div></div><div class="note-grid" id="noteGrid">${t.notes.map((x,i)=>`<button class="note-card material-trigger" data-type="note" data-index="${i}"><span class="pill">FREE NOTE</span><h3>${esc(x[0])}</h3><p>${esc(x[1])}</p><span>Read & practice →</span></button>`).join('')}</div></section><section id="code" class="content-section"><div class="section-heading"><div><div class="eyebrow">03 · CODE LAB</div><h2>Learn by seeing it work</h2><p>Read the example, change it, break it, then rebuild it from memory.</p></div></div><div class="code-card"><div class="code-top"><span><i></i><i></i><i></i></span><b>example.{('java' if key=='java' else 'py' if key=='python' else 'jsx' if key=='react' else 'js' if key=='ai' else 'sql' if key=='sql' else 'java')}</b><button onclick="navigator.clipboard?.writeText(document.getElementById('code').innerText)">Copy</button></div><pre id="code"><code>${esc(t.code)}</code></pre></div><div class="practice-strip"><div><b>Try it yourself</b><p>Change one part of the example and predict the result before running it.</p></div><span>10 min practice</span></div></section><section id="practice" class="content-section"><div class="section-heading"><div><div class="eyebrow">04 · BUILD & PRACTICE</div><h2>Turn knowledge into a project</h2><p>Projects make the concepts stick and give you something useful for your portfolio.</p></div></div><div class="practice-grid"><article class="feature-card"><span class="feature-icon">🚀</span><div class="pill">MINI PROJECT</div><h3>${esc(t.project)}</h3><ol><li>Define the smallest useful version.</li><li>Build the happy path first.</li><li>Add validation and error handling.</li><li>Add tests and documentation.</li><li>Refactor only after it works.</li></ol><a href="#project-guide" class="text-link">Open project checklist →</a></article><article class="feature-card quiz-feature"><span class="feature-icon">🧠</span><div class="pill">FREE QUIZ</div><h3>Check your understanding</h3><p>Test yourself after studying. Get instant scoring and explanations.</p><div class="score-preview"><b>10</b><span>questions</span><b>Instant</b><span>results</span></div><a class="btn primary" href="/quizzes.html?topic=${encodeURIComponent(t.name)}">Start quiz →</a></article></div><div id="project-guide" class="checklist-card"><div><div class="eyebrow">PROJECT CHECKLIST</div><h3>Build, test, explain</h3></div><div class="checks">${['Define requirements','Create a clean project structure','Implement the core feature','Add validation & error handling','Write automated tests','Document setup and decisions'].map((x,i)=>`<label><input type="checkbox" data-check="${key}-${i}"><span>${x}</span></label>`).join('')}</div></div></section><section id="interview" class="content-section"><div class="section-heading"><div><div class="eyebrow">05 · INTERVIEW PREP</div><h2>Questions you should be able to explain</h2><p>Don't memorize one-line answers. Explain the concept, give an example and mention a trade-off.</p></div></div><div class="interview-grid">${t.interview.map((q,i)=>`<details><summary><span>${String(i+1).padStart(2,'0')}</span>${esc(q)}</summary><div>Prepare a 30–60 second explanation, a practical example, and one common pitfall. Then try answering without looking at your notes.</div></details>`).join('')}</div></section><section class="resource-banner"><div><div class="eyebrow">KEEP GOING</div><h2>Free learning today. Premium when you need deeper practice.</h2><p>Compare mock exams, practice packs and structured preparation materials.</p></div><a class="btn primary" href="/store.html">View premium materials →</a></section></div></div><div id="lessonPanel" class="lesson-panel" aria-hidden="true"><div class="lesson-backdrop"></div><div class="lesson-drawer"><button class="drawer-close" aria-label="Close">×</button><div id="lessonBody"></div></div></div>`;
-const progressKey='tch-progress-'+key; const checksKey='tch-checks-'+key; const done=JSON.parse(localStorage.getItem(progressKey)||'[]'); const checks=JSON.parse(localStorage.getItem(checksKey)||'[]');
-function refreshProgress(){document.querySelectorAll('.module-card').forEach((el,i)=>el.classList.toggle('done',done.includes(i))); const pct=Math.round(done.length/t.roadmap.length*100); document.getElementById('progressBar').style.width=pct+'%'; document.querySelector('.progress-top b').textContent=`${done.length} / ${t.roadmap.length} modules`;}
-function openLesson(type,index){const x=type==='roadmap'?t.roadmap[index]:t.notes[index]; const title=x[1]||x[0]; const desc=x[2]||x[1]; const related=type==='roadmap'?`<h3>Study checklist</h3><ul><li>Read the concept and write it in your own words.</li><li>Create a tiny example from memory.</li><li>Change one input and predict the result.</li><li>Use the concept in the mini project.</li></ul><h3>Revision prompt</h3><p>Can you explain <b>${esc(title)}</b> to another developer without looking at the notes?</p>`:`<h3>In simple terms</h3><p>${esc(desc)}</p><h3>How to study it</h3><ul><li>Explain the definition.</li><li>Write a small example.</li><li>Test one edge case.</li><li>Identify one trade-off or common mistake.</li></ul>`; document.getElementById('lessonBody').innerHTML=`<div class="eyebrow">${type==='roadmap'?'FREE LESSON':'FREE STUDY NOTE'}</div><h2>${esc(title)}</h2><p class="drawer-lead">${esc(desc)}</p>${related}<a class="btn primary" href="/quizzes.html?topic=${encodeURIComponent(t.name)}">Practice with quiz →</a>`; const panel=document.getElementById('lessonPanel'); panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); if(type==='roadmap'&&!done.includes(index)){done.push(index);localStorage.setItem(progressKey,JSON.stringify(done));refreshProgress();}}
-document.querySelectorAll('.material-trigger').forEach(el=>el.addEventListener('click',()=>openLesson(el.dataset.type,Number(el.dataset.index)))); document.querySelector('.drawer-close').onclick=()=>{document.getElementById('lessonPanel').classList.remove('open');document.getElementById('lessonPanel').setAttribute('aria-hidden','true')}; document.querySelector('.lesson-backdrop').onclick=document.querySelector('.drawer-close').onclick;
-document.getElementById('noteSearch').addEventListener('input',e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('#noteGrid .note-card').forEach(c=>c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none')});
-document.querySelectorAll('[data-check]').forEach(c=>{c.checked=checks.includes(c.dataset.check);c.addEventListener('change',()=>{if(c.checked&&!checks.includes(c.dataset.check))checks.push(c.dataset.check);if(!c.checked){const i=checks.indexOf(c.dataset.check);if(i>=0)checks.splice(i,1)}localStorage.setItem(checksKey,JSON.stringify(checks));})}); refreshProgress();
-</script><script src="/js/auth-ui.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Free Study Materials | TechCertHub</title>
+    <meta name="description" content="Free study materials, roadmaps, notes, examples, projects, interview questions and quizzes for developers and AI learners.">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .topic-page{max-width:1180px;margin:0 auto;padding:70px 24px}
+        .topic-hero{display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:end;padding-bottom:50px;border-bottom:1px solid #e5e7eb}
+        .topic-hero h1{font-size:clamp(38px,6vw,68px);line-height:1;margin:10px 0 18px}
+        .topic-hero p{font-size:19px;line-height:1.7;max-width:760px;color:#667085}
+        .topic-badge{display:inline-flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em;font-size:12px}
+        .topic-icon{font-size:34px}
+        .topic-stat{background:#f6f7fb;border-radius:22px;padding:25px}
+        .topic-stat strong{display:block;font-size:34px;margin-bottom:4px}
+        .topic-stat span{color:#667085}
+        .topic-section{padding:55px 0}
+        .topic-section h2{font-size:32px;margin:0 0 24px}
+        .roadmap-grid,.notes-grid,.interview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+        .topic-card,.note-card,.interview-card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:22px;box-shadow:0 8px 25px rgba(15,23,42,.04)}
+        .roadmap-card{display:grid;grid-template-columns:55px 1fr;gap:16px}
+        .roadmap-num{font-weight:900;font-size:22px}
+        .topic-card h3,.note-card h3{margin:0 0 8px;font-size:20px}
+        .topic-card p,.note-card p,.interview-card{color:#667085;line-height:1.65}
+        .code-wrap{background:#111827;color:#f8fafc;border-radius:20px;overflow:auto}
+        .code-wrap pre{margin:0;padding:25px;line-height:1.65;font-size:14px;white-space:pre-wrap}
+        .project-box{background:#111827;color:#fff;border-radius:22px;padding:30px}
+        .project-box p{color:#d1d5db;line-height:1.7;font-size:17px}
+        .back-link{display:inline-block;margin-bottom:25px}
+        @media(max-width:800px){
+         .topic-hero{grid-template-columns:1fr}
+         .roadmap-grid,.notes-grid,.interview-grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+<header class="topbar">
+    <a class="logo" href="/"><span>TC</span> TechCertHub</a>
+    <nav>
+        <a href="/certifications.html">Certifications</a>
+        <a href="/learn.html">Learn</a>
+        <a href="/quizzes.html">Quick Quizzes</a>
+        <a href="/community.html">Community</a>
+        <a class="nav-cta" href="/store.html">Premium Materials</a>
+    </nav>
+    <button class="menu" onclick="document.body.classList.toggle('nav-open')">☰</button>
+</header>
+
+<main class="topic-page" id="topicPage"></main>
+
+<footer>
+    <div><a class="logo" href="/"><span>TC</span> TechCertHub</a><p>Free-first developer learning.</p></div>
+    <div><b>Explore</b><a href="/certifications.html">Certifications</a><a href="/learn.html">Programming & AI</a><a href="/quizzes.html">Quick Quizzes</a><a href="/store.html">Premium Materials</a></div>
+    <div><b>Company</b><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+</footer>
+
+<script>
+    const topics = {
+      java: {
+        name:"Java", eyebrow:"PROGRAMMING", icon:"☕", tone:"orange",
+        tagline:"Master Java from fundamentals to production-ready backend development.",
+        roadmap:[
+          ["01","Core Java","Syntax, types, operators, control flow, arrays and strings."],
+          ["02","OOP","Classes, objects, inheritance, interfaces, abstraction and polymorphism."],
+          ["03","Collections","List, Set, Map, generics and choosing the right collection."],
+          ["04","Functional Java","Lambdas, functional interfaces, Optional and method references."],
+          ["05","Streams","Map, filter, reduce, collectors, grouping and stream design."],
+          ["06","Exceptions & I/O","Checked vs unchecked exceptions, files, NIO and resource management."],
+          ["07","Concurrency & JVM","Threads, executors, synchronization, memory model and JVM basics."],
+          ["08","Testing & Spring Boot","JUnit, mocking, REST APIs, dependency injection and production patterns."]
+        ],
+        notes:[
+          ["Variables & Types","Understand primitives vs references, numeric types, boolean, char, casting, scope and the difference between a value and an object reference."],
+          ["Classes & Objects","A class defines state and behavior; objects are instances. Practice constructors, fields, methods, access modifiers and composition."],
+          ["Inheritance & Polymorphism","Prefer composition when reuse is about behavior. Use inheritance when the subtype truly satisfies the parent contract."],
+          ["Collections","Use List for ordered duplicates, Set for uniqueness and Map for key-value lookup. Know ArrayList, HashSet and HashMap trade-offs."],
+          ["Generics","Generics provide compile-time type safety and reusable APIs. Learn bounded types, wildcards and the difference between ? extends and ? super."],
+          ["Streams","A stream pipeline usually has a source, intermediate operations and a terminal operation. Avoid hidden side effects inside pipelines."],
+          ["Concurrency","Use executors instead of manually managing many threads. Protect shared mutable state or design ownership so sharing is minimized."],
+          ["Testing","Unit tests should be fast and focused. Add integration tests around persistence, HTTP boundaries and important framework behavior."]
+        ],
+        code:`List<String> names = List.of("Ana", "Ben", "Cara");
+    long count = names.stream()
+        .filter(n -> n.length() > 3)
+        .count();
+    System.out.println(count);`,
+        project:"Build a task-management REST API with CRUD, validation, persistence, pagination and tests.",
+        interview:["Explain == vs equals().","Why should equals() and hashCode() agree?","ArrayList vs LinkedList?","HashMap vs ConcurrentHashMap?","What is dependency injection?","Checked vs unchecked exceptions?","What does volatile guarantee?","What is the purpose of the JVM?"]
+      },
+
+      python: {
+        name:"Python", eyebrow:"PROGRAMMING", icon:"🐍", tone:"blue",
+        tagline:"Learn Python for scripting, APIs, automation, data and AI.",
+        roadmap:[
+          ["01","Python Fundamentals","Variables, strings, numbers, lists, tuples, sets, dictionaries and control flow."],
+          ["02","Functions","Arguments, scope, return values, comprehensions, generators and decorators."],
+          ["03","OOP & Modules","Classes, composition, inheritance, modules, packages and clean project structure."],
+          ["04","Files & Data","Pathlib, JSON, CSV, serialization, exceptions and resource handling."],
+          ["05","APIs & Web","HTTP, requests, REST APIs, authentication, retries and timeouts."],
+          ["06","Testing & Quality","pytest concepts, fixtures, mocking, typing, linting and packaging."],
+          ["07","Async & Performance","Iterators, async/await, concurrency choices and profiling basics."],
+          ["08","Python for AI","Data preparation, notebooks, model APIs, embeddings and reliable AI workflows."]
+        ],
+        notes:[
+          ["Data Structures","Lists are mutable sequences, tuples are immutable sequences, sets model uniqueness, and dictionaries map keys to values."],
+          ["Functions","Keep functions focused. Use explicit inputs and return values instead of hidden global state."],
+          ["Comprehensions","Use comprehensions for simple transformations and filters; use a normal loop when the logic becomes difficult to read."],
+          ["Exceptions","Catch specific exceptions, add useful context and avoid catching Exception broadly unless you can handle it safely."],
+          ["Virtual Environments","Use an isolated environment per project so dependencies do not conflict. Record dependencies in pyproject.toml or requirements files."],
+          ["Generators","Generators produce values lazily, reducing memory use for large sequences. Understand yield and iterator protocol."],
+          ["Testing","Test business behavior and edge cases. Keep tests deterministic and isolate external services behind boundaries."],
+          ["AI Applications","Validate model outputs, handle API failures and keep secrets outside source code. Build evaluation cases before optimizing prompts."]
+        ],
+        code:`def normalize_names(names):
+        return [name.strip().title() for name in names if name.strip()]
+
+    print(normalize_names([" ana ", "ben"]))`,
+        project:"Build a CLI expense tracker that stores JSON, validates input and exposes a small REST API.",
+        interview:["List vs tuple?","What is a dictionary?","What is a generator?","How does a virtual environment help?","What is a decorator?","When would you use async/await?","How should Python exceptions be handled?","How would you structure a Python project?"]
+      },
+
+      react: {
+        name:"React", eyebrow:"FRONTEND", icon:"⚛", tone:"purple",
+        tagline:"Build modern React interfaces with components, state, hooks and APIs.",
+        roadmap:[
+          ["01","Components & JSX","Components, JSX, props, composition and conditional rendering."],
+          ["02","State & Events","State, event handlers, controlled inputs and lifting state."],
+          ["03","Lists & Forms","Keys, forms, validation, derived state and reusable form components."],
+          ["04","Hooks","useState, useEffect, useMemo, useCallback and custom hooks."],
+          ["05","Data & APIs","Fetching, loading/error states, caching concepts and API boundaries."],
+          ["06","Routing & UX","Routing, navigation, accessibility, responsive layouts and empty states."],
+          ["07","Performance","Rendering behavior, memoization, code splitting and avoiding premature optimization."],
+          ["08","Testing & Production","Component tests, build pipelines, environment configuration and deployment."]
+        ],
+        notes:[
+          ["Components","Keep components focused and compose smaller pieces. A component should have a clear responsibility and predictable inputs."],
+          ["Props","Props are inputs passed from a parent. Treat them as read-only and use callbacks when a child needs to request a change."],
+          ["State","Store the minimum state needed. Derive values from existing state rather than duplicating them."],
+          ["Effects","Use effects to synchronize with external systems. Do not use an effect for calculations that can happen during render."],
+          ["Keys","Give list items stable keys based on identity, not array position when items can be reordered or removed."],
+          ["Forms","Controlled inputs make form state explicit. Validate early and give useful error and loading feedback."],
+          ["Data Fetching","Model loading, success, empty and error states. Avoid race conditions when requests can overlap."],
+          ["Performance","Measure first. Reduce unnecessary renders, large bundles and expensive calculations before adding memoization."]
+        ],
+        code:`function Greeting({ name }) {
+      return <h2>Hello, {name}!</h2>;
+    }
+
+    export default function App() {
+      return <Greeting name="TechCertHub" />;
+    }`,
+        project:"Build a certification dashboard with search, filters, quiz progress, loading/error states and responsive cards.",
+        interview:["What are props?","Why are keys important?","When should you use useEffect?","What is lifting state up?","Controlled vs uncontrolled input?","What is a custom hook?","When does memoization help?","How would you test a React component?"]
+      },
+
+      ai: {
+        name:"AI & Generative AI", eyebrow:"ARTIFICIAL INTELLIGENCE", icon:"✦", tone:"purple",
+        tagline:"Understand LLM applications, prompting, RAG, tools, agents and evaluation.",
+        roadmap:[
+          ["01","AI Foundations","Tokens, context windows, models, inference, embeddings and common failure modes."],
+          ["02","Prompt Engineering","Instructions, context, examples, structured outputs and prompt testing."],
+          ["03","Embeddings","Semantic representations, similarity search and choosing retrieval signals."],
+          ["04","RAG","Chunking, indexing, retrieval, reranking, citations and grounded generation."],
+          ["05","Tool Use","Function/tool calling, schemas, validation, permissions and failure handling."],
+          ["06","Agents & Workflows","Deterministic workflows, agent loops, state, memory and guardrails."],
+          ["07","Evaluation","Golden sets, quality metrics, regression tests, observability and human review."],
+          ["08","Production AI","Latency, cost, privacy, prompt injection, fallbacks and responsible deployment."]
+        ],
+        notes:[
+          ["LLMs","A language model predicts tokens from context. Application quality depends on model choice, instructions, context, tools, data and evaluation—not just model size."],
+          ["Prompt Design","Specify the task, relevant context, constraints and output format. Test prompts against representative examples instead of relying on one successful response."],
+          ["Structured Output","Use explicit schemas when downstream code needs reliable fields. Validate the result before using it."],
+          ["Embeddings","Embeddings map text or other data into vectors where related items tend to be close. Retrieval quality depends on chunking, indexing and query design."],
+          ["RAG","Retrieval-augmented generation supplies retrieved evidence to generation. Track retrieval quality separately from answer quality."],
+          ["Tool Calling","Treat tools as controlled operations. Validate arguments, apply least-privilege permissions and handle tool failures explicitly."],
+          ["Evaluation","Build a representative test set and define measurable criteria. Run it after changing prompts, models, retrieval or application logic."],
+          ["Safety","Consider prompt injection, data leakage, unsafe tool calls and overconfident answers. Add boundaries, logging and human review where risk warrants it."]
+        ],
+        code:`const result = await client.messages.create({
+      model: "your-model",
+      max_tokens: 300,
+      messages: [
+        { role: "user", content: "Summarize this document in 5 bullets." }
+      ]
+    });`,
+        project:"Build a document Q&A assistant with retrieval, citations, evaluation cases and a safe fallback when evidence is missing.",
+        interview:["What is RAG?","What is an embedding?","How do you evaluate an LLM app?","What is prompt injection?","When should you use tool calling?","What is a context window?","How can you reduce hallucinations?","When should an AI workflow use human review?"]
+      },
+
+      sql: {
+        name:"SQL", eyebrow:"DATABASE", icon:"⌘", tone:"dark",
+        tagline:"Go from SELECT basics to analytical queries and performance.",
+        roadmap:[
+          ["01","Query Basics","SELECT, WHERE, ORDER BY, LIMIT, NULL and expressions."],
+          ["02","Data Modeling","Primary keys, foreign keys, normalization and relationships."],
+          ["03","Joins","INNER, LEFT, RIGHT concepts, join conditions and duplicate rows."],
+          ["04","Aggregation","GROUP BY, HAVING, COUNT, SUM, AVG and conditional aggregation."],
+          ["05","CTEs & Subqueries","Common table expressions, correlated subqueries and readable query design."],
+          ["06","Window Functions","PARTITION BY, ranking, running totals and comparisons without collapsing rows."],
+          ["07","Transactions","ACID concepts, isolation, commits, rollbacks and concurrency issues."],
+          ["08","Indexes & Performance","Indexes, query plans, pagination and avoiding unnecessary work."]
+        ],
+        notes:[
+          ["SELECT","Start with the smallest query that proves the data you need. Add filtering, sorting and projection deliberately."],
+          ["NULL","NULL means unknown/missing, not zero or an empty string. Learn IS NULL, COALESCE and three-valued logic."],
+          ["Joins","Understand which rows each join preserves before writing it. Check for one-to-many relationships that can multiply rows."],
+          ["Aggregation","WHERE filters rows before grouping; HAVING filters groups after aggregation."],
+          ["CTEs","CTEs can make multi-step queries easier to read. Keep each step focused and name it by business meaning."],
+          ["Window Functions","Window functions calculate across related rows while preserving row-level results."],
+          ["Transactions","Transactions group related changes so the database can preserve consistency. Know commit, rollback and isolation trade-offs."],
+          ["Indexes","Indexes can speed reads but add storage and write cost. Use query plans and measurements rather than guessing."]
+        ],
+        code:`SELECT department_id,
+           COUNT(*) AS employee_count,
+           AVG(salary) AS average_salary
+    FROM employees
+    WHERE active = true
+    GROUP BY department_id
+    HAVING COUNT(*) > 5
+    ORDER BY average_salary DESC;`,
+        project:"Build a reporting database for a small business with normalized tables, joins, dashboards, indexes and analytical queries.",
+        interview:["WHERE vs HAVING?","INNER JOIN vs LEFT JOIN?","What is normalization?","What is an index?","What is a transaction?","What does ACID mean?","What is a window function?","How would you troubleshoot a slow query?"]
+      },
+
+      spring: {
+        name:"Spring Boot", eyebrow:"BACKEND", icon:"◆", tone:"green",
+        tagline:"Build production-ready Java services with Spring Boot, REST, data and security.",
+        roadmap:[
+          ["01","Spring Fundamentals","IoC, dependency injection, beans, configuration and application context."],
+          ["02","Spring Boot","Starters, auto-configuration, properties, profiles and application lifecycle."],
+          ["03","REST APIs","Controllers, DTOs, validation, exception handling and HTTP semantics."],
+          ["04","Spring Data","Repositories, JPA entities, relationships, transactions and pagination."],
+          ["05","Security","Authentication, authorization, password hashing, sessions, JWT concepts and CSRF."],
+          ["06","Testing","JUnit, Mockito, MockMvc, integration tests and test slices."],
+          ["07","Production","Logging, Actuator, configuration management, health checks and observability."],
+          ["08","Deployment","Containers, environment variables, databases, CI/CD and cloud deployment patterns."]
+        ],
+        notes:[
+          ["Dependency Injection","Spring manages application objects as beans and injects their dependencies. Constructor injection makes required dependencies explicit and testable."],
+          ["Auto-Configuration","Spring Boot configures common infrastructure based on the classpath and application properties. Understand what Boot is configuring before overriding it."],
+          ["REST Controllers","Keep HTTP concerns at the controller boundary. Validate incoming DTOs and return consistent response/error structures."],
+          ["JPA","Entities map Java objects to relational data. Understand fetch behavior, relationships, transactions and the N+1 query problem."],
+          ["Transactions","Use transaction boundaries around related database changes. Understand propagation, rollback behavior and isolation."],
+          ["Security","Separate authentication from authorization. Store passwords using strong hashing and apply least privilege to protected endpoints."],
+          ["Testing","Use unit tests for focused logic and integration tests for important database, HTTP and framework behavior."],
+          ["Production","Externalize configuration and secrets. Add health checks, structured logging, metrics and clear failure handling."]
+        ],
+        code:`@RestController
+    @RequestMapping("/api/tasks")
+    class TaskController {
+
+        private final TaskService service;
+
+        TaskController(TaskService service) {
+            this.service = service;
+        }
+
+        @GetMapping
+        List<TaskDto> list() {
+            return service.findAll();
+        }
+    }`,
+        project:"Build a Spring Boot task API with PostgreSQL, validation, authentication, pagination, global error handling and automated tests.",
+        interview:["What is dependency injection?","@Component vs @Service vs @Repository?","What is Spring Boot auto-configuration?","What is @Transactional?","JPA vs JDBC?","How does Spring Security authenticate a request?","How do you test a REST controller?","How would you deploy a Spring Boot application?"]
+      }
+    };
+
+    function esc(value) {
+      return String(value).replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[c]));
+    }
+
+    const key = new URLSearchParams(location.search).get("topic") || "java";
+    const topic = topics[key] || topics.java;
+    const page = document.getElementById("topicPage");
+
+    page.innerHTML = `
+    <a class="back-link" href="/learn.html">← Back to learning tracks</a>
+
+    <section class="topic-hero">
+      <div>
+        <div class="topic-badge"><span class="topic-icon">${esc(topic.icon)}</span>${esc(topic.eyebrow)}</div>
+        <h1>${esc(topic.name)}</h1>
+        <p>${esc(topic.tagline)}</p>
+      </div>
+      <div class="topic-stat">
+        <strong>${topic.roadmap.length}</strong>
+        <span>roadmap modules</span>
+        <hr>
+        <strong>${topic.notes.length}</strong>
+        <span>study notes</span>
+        <hr>
+        <strong>${topic.interview.length}</strong>
+        <span>interview questions</span>
+      </div>
+    </section>
+
+    <section class="topic-section">
+      <div class="eyebrow">ROADMAP</div>
+      <h2>What to learn</h2>
+      <div class="roadmap-grid">
+        ${topic.roadmap.map(item => `
+          <article class="topic-card roadmap-card">
+            <div class="roadmap-num">${esc(item[0])}</div>
+            <div><h3>${esc(item[1])}</h3><p>${esc(item[2])}</p></div>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+
+    <section class="topic-section">
+      <div class="eyebrow">STUDY NOTES</div>
+      <h2>Core concepts</h2>
+      <div class="notes-grid">
+        ${topic.notes.map(item => `
+          <article class="note-card"><h3>${esc(item[0])}</h3><p>${esc(item[1])}</p></article>
+        `).join("")}
+      </div>
+    </section>
+
+    <section class="topic-section">
+      <div class="eyebrow">CODE EXAMPLE</div>
+      <h2>See it in practice</h2>
+      <div class="code-wrap"><pre><code>${esc(topic.code)}</code></pre></div>
+    </section>
+
+    <section class="topic-section">
+      <div class="eyebrow">MINI PROJECT</div>
+      <h2>Build something</h2>
+      <div class="project-box"><p>${esc(topic.project)}</p></div>
+    </section>
+
+    <section class="topic-section">
+      <div class="eyebrow">INTERVIEW PREP</div>
+      <h2>Questions to practice</h2>
+      <div class="interview-grid">
+        ${topic.interview.map((q,i) => `<div class="interview-card"><strong>${i+1}.</strong> ${esc(q)}</div>`).join("")}
+      </div>
+    </section>
+    `;
+</script>
+<script src="/js/auth-ui.js"></script>
+</body>
+</html>
