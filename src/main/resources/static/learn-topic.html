@@ -1,10 +1,20 @@
+```
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Free Study Materials | TechCertHub</title>
-    <meta name="description" content="Free study materials, roadmaps, notes, examples, projects, interview questions and quizzes for developers and AI learners.">
+    <title>Free Developer Learning Materials | TechCertHub</title>
+    <meta name="description" content="Free developer learning roadmaps, study notes, code examples, projects, interview questions and quizzes for Java, Python, React, SQL, Spring Boot and AI.">
+    <meta name="robots" content="index, follow">
+    <link id="canonicalLink" rel="canonical" href="https://techcertshub.com/learn-topic.html?topic=java">
+    <meta property="og:type" content="article">
+    <meta id="ogTitle" property="og:title" content="Free Developer Learning Materials | TechCertHub">
+    <meta id="ogDescription" property="og:description" content="Free developer learning roadmaps, study notes, code examples, projects, interview questions and quizzes.">
+    <meta id="ogUrl" property="og:url" content="https://techcertshub.com/learn-topic.html?topic=java">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta id="twitterTitle" name="twitter:title" content="Free Developer Learning Materials | TechCertHub">
+    <meta id="twitterDescription" name="twitter:description" content="Free developer learning roadmaps, study notes, code examples, projects, interview questions and quizzes.">
     <link rel="stylesheet" href="/css/style.css">
     <style>
         .topic-page{max-width:1180px;margin:0 auto;padding:70px 24px}
@@ -273,8 +283,81 @@
       }[c]));
     }
 
-    const key = new URLSearchParams(location.search).get("topic") || "java";
-    const topic = topics[key] || topics.java;
+    const topicSeo = {
+      java: {
+        title: "Free Java Learning Roadmap, Notes & Interview Questions | TechCertHub",
+        description: "Learn Java with a free roadmap covering Core Java, OOP, collections, streams, concurrency, JVM, testing and Spring Boot, plus notes, code examples and interview questions."
+      },
+      python: {
+        title: "Free Python Learning Roadmap, Notes & Interview Questions | TechCertHub",
+        description: "Learn Python with a free roadmap covering fundamentals, functions, OOP, APIs, testing, async, automation and AI, plus notes, code examples and interview questions."
+      },
+      react: {
+        title: "Free React Learning Roadmap, Notes & Interview Questions | TechCertHub",
+        description: "Learn React with a free roadmap covering components, props, state, hooks, APIs, routing, performance and testing, plus notes, code examples and interview questions."
+      },
+      ai: {
+        title: "Free AI & Generative AI Learning Roadmap | TechCertHub",
+        description: "Learn AI and Generative AI with a free roadmap covering LLMs, prompting, embeddings, RAG, tool use, agents, evaluation, safety and production AI."
+      },
+      sql: {
+        title: "Free SQL Learning Roadmap, Notes & Interview Questions | TechCertHub",
+        description: "Learn SQL with a free roadmap covering queries, joins, aggregation, CTEs, window functions, transactions, indexes and performance, plus notes and interview questions."
+      },
+      spring: {
+        title: "Free Spring Boot Learning Roadmap, Notes & Interview Questions | TechCertHub",
+        description: "Learn Spring Boot with a free roadmap covering dependency injection, REST APIs, Spring Data, security, testing, production and deployment, plus notes and interview questions."
+      }
+    };
+
+    function setTopicSeo(topicKey, topic) {
+      const seo = topicSeo[topicKey] || topicSeo.java;
+      const canonical = new URL("/learn-topic.html", location.origin);
+      canonical.searchParams.set("topic", topicKey);
+
+      document.title = seo.title;
+      document.querySelector('meta[name="description"]').setAttribute("content", seo.description);
+      document.getElementById("canonicalLink").href = canonical.href;
+      document.getElementById("ogTitle").setAttribute("content", seo.title);
+      document.getElementById("ogDescription").setAttribute("content", seo.description);
+      document.getElementById("ogUrl").setAttribute("content", canonical.href);
+      document.getElementById("twitterTitle").setAttribute("content", seo.title);
+      document.getElementById("twitterDescription").setAttribute("content", seo.description);
+
+      let structuredData = document.getElementById("topicStructuredData");
+      if (!structuredData) {
+        structuredData = document.createElement("script");
+        structuredData.id = "topicStructuredData";
+        structuredData.type = "application/ld+json";
+        document.head.appendChild(structuredData);
+      }
+
+      structuredData.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": seo.title.replace(" | TechCertHub", ""),
+        "description": seo.description,
+        "url": canonical.href,
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": canonical.href
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "TechCertHub",
+          "url": "https://techcertshub.com/"
+        },
+        "about": {
+          "@type": "Thing",
+          "name": topic.name
+        }
+      });
+    }
+
+    const requestedKey = (new URLSearchParams(location.search).get("topic") || "java").toLowerCase();
+    const key = topics[requestedKey] ? requestedKey : "java";
+    const topic = topics[key];
+    setTopicSeo(key, topic);
     const page = document.getElementById("topicPage");
 
     page.innerHTML = `
@@ -340,8 +423,28 @@
         ${topic.interview.map((q,i) => `<div class="interview-card"><strong>${i+1}.</strong> ${esc(q)}</div>`).join("")}
       </div>
     </section>
+
+    <section class="topic-section">
+      <div class="eyebrow">KEEP LEARNING</div>
+      <h2>More from TechCertHub</h2>
+      <div class="skill-grid">
+        <a href="/learn-topic.html?topic=java"><b>☕ Java</b><span>Free Java roadmap and interview prep →</span></a>
+        <a href="/learn-topic.html?topic=python"><b>🐍 Python</b><span>Free Python roadmap and interview prep →</span></a>
+        <a href="/learn-topic.html?topic=react"><b>⚛ React</b><span>Free React roadmap and interview prep →</span></a>
+        <a href="/learn-topic.html?topic=ai"><b>✦ AI & GenAI</b><span>Free AI learning roadmap →</span></a>
+        <a href="/learn-topic.html?topic=sql"><b>⌘ SQL</b><span>Free SQL roadmap and interview prep →</span></a>
+        <a href="/learn-topic.html?topic=spring"><b>◆ Spring Boot</b><span>Free Spring Boot roadmap and interview prep →</span></a>
+      </div>
+      <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap">
+        <a class="btn primary" href="/quizzes.html">Take a free quiz →</a>
+        <a class="btn ghost-dark" href="/community.html">Ask the community →</a>
+        <a class="btn ghost-dark" href="/certifications.html">Explore certifications →</a>
+      </div>
+    </section>
     `;
 </script>
 <script src="/js/auth-ui.js"></script>
 </body>
 </html>
+
+```
