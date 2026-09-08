@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -58,7 +59,7 @@ class PdfControllerTest {
         PdfRepository repo = Mockito.mock(PdfRepository.class);
         PdfDocument existing = doc(4L, "old.pdf", 4900);
         when(repo.findById(4L)).thenReturn(Optional.of(existing));
-        when(service.updatePrice(existing, 9900)).thenReturn(existing);
+        when(service.updatePrice(existing, 9900L)).thenReturn(existing);
         MockMvc mvc = MockMvcBuilders.standaloneSetup(new PdfController(service, repo)).build();
         mvc.perform(patch("/api/pdfs/admin/4/price").contentType(MediaType.APPLICATION_JSON).content("{\"pricePaise\":9900}"))
                 .andExpect(status().isOk());
@@ -69,7 +70,7 @@ class PdfControllerTest {
         PdfRepository repo = Mockito.mock(PdfRepository.class);
         PdfDocument existing = doc(5L, "old.pdf", 4900);
         when(repo.findById(5L)).thenReturn(Optional.of(existing));
-        when(service.replaceFile(Mockito.eq(existing), Mockito.any())).thenReturn(existing);
+        when(service.replaceFile(Mockito.eq(existing), Mockito.<MultipartFile>any())).thenReturn(existing);
         MockMvc mvc = MockMvcBuilders.standaloneSetup(new PdfController(service, repo)).build();
         MockMultipartFile file = new MockMultipartFile("file", "new.pdf", MediaType.APPLICATION_PDF_VALUE, "%PDF-1.7".getBytes());
         mvc.perform(multipart("/api/pdfs/admin/5/file").file(file).with(req -> { req.setMethod("PUT"); return req; }))
