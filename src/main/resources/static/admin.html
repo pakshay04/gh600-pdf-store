@@ -1,126 +1,22 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>TechCertHub Admin</title>
-
-    <link rel="stylesheet"
-          href="/css/style.css">
-
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TechCertHub Admin — Materials</title><link rel="stylesheet" href="/css/style.css">
+<style>
+.admin-wrap{width:min(1180px,calc(100% - 32px));margin:36px auto 70px}.admin-head{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:24px}.admin-head h1{margin:6px 0}.admin-grid{display:grid;grid-template-columns:360px 1fr;gap:24px}.admin-panel{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:24px;box-shadow:0 12px 35px rgba(15,23,42,.07)}.admin-panel h2{margin-top:0}.drop{display:block;border:2px dashed #cbd5e1;border-radius:14px;padding:32px;text-align:center;cursor:pointer;background:#f8fafc}.drop input{display:none}.admin-table{width:100%;border-collapse:collapse}.admin-table th,.admin-table td{padding:14px 10px;border-bottom:1px solid #eef2f7;text-align:left;vertical-align:middle}.admin-table th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#64748b}.admin-table td{font-size:14px}.material-name{font-weight:700;color:#0f172a}.material-id{color:#64748b;font-size:12px}.price-edit{width:90px;padding:8px;border:1px solid #cbd5e1;border-radius:8px}.actions{display:flex;gap:8px;flex-wrap:wrap}.small-btn{padding:8px 10px;border-radius:8px;font-size:12px}.outline{background:#fff;color:#334155;border:1px solid #cbd5e1}.primary-small{background:#4f46e5}.replace-label{display:inline-block;padding:8px 10px;background:#f1f5f9;border-radius:8px;cursor:pointer;font-weight:700;font-size:12px}.replace-label input{display:none}.empty{padding:35px;text-align:center;color:#64748b}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}.stat{background:#f8fafc;border-radius:12px;padding:15px}.stat b{font-size:24px;display:block}.message{min-height:22px}.url-mini{width:100%;padding:7px;border:1px solid #e2e8f0;border-radius:7px;font-size:11px}.logout{background:#fff;color:#334155;border:1px solid #cbd5e1}
+@media(max-width:900px){.admin-grid{grid-template-columns:1fr}.admin-table{min-width:850px}.table-scroll{overflow:auto}.stats{grid-template-columns:1fr 1fr}}
+</style>
 </head>
-
 <body>
-
-<main class="page">
-
-    <section id="seller">
-
-        <div class="admin-card">
-
-            <div class="brand">
-
-                <span class="badge">
-                    ADMIN
-                </span>
-
-                <h1>
-                    TechCertHub PDF Store
-                </h1>
-
-            </div>
-
-
-            <p class="muted">
-
-                Upload your GH-600 mock exam PDF
-                and create a customer purchase link.
-
-            </p>
-
-
-            <label class="drop">
-
-                <input id="file"
-                       type="file"
-                       accept=".pdf,application/pdf">
-
-                <span>
-                    📄 Choose PDF
-                </span>
-
-            </label>
-
-
-            <p id="filename"
-               class="muted">
-            </p>
-
-
-            <label>
-
-                Price (₹)
-
-                <input id="price"
-                       type="number"
-                       min="1"
-                       step="1"
-                       value="499">
-
-            </label>
-
-
-            <button id="upload">
-
-                Upload &amp; Create Link
-
-            </button>
-
-
-            <section id="uploadResult"
-                     class="hidden success">
-
-                <h2>
-                    ✅ PDF uploaded
-                </h2>
-
-                <p>
-                    Customer purchase link:
-                </p>
-
-
-                <input id="link"
-                       class="url"
-                       readonly>
-
-
-                <button id="copy">
-
-                    Copy Link
-
-                </button>
-
-            </section>
-
-
-            <p id="sellerMsg"
-               class="message">
-            </p>
-
-        </div>
-
-    </section>
-
-</main>
-
-
+<header class="topbar"><a class="logo" href="/"><span>TC</span> TechCertHub</a><nav><a href="/certifications.html">Certifications</a><a href="/learn.html">Learn</a><a href="/quizzes.html">Quick Quizzes</a><a href="/community.html">Community</a><a class="nav-cta" href="/store.html">Premium Materials</a></nav></header>
+<main class="admin-wrap">
+<div class="admin-head"><div><span class="badge">ADMIN</span><h1>Material Manager</h1><p class="muted">Manage every paid PDF used by TechCertHub. Add new products, replace files and update prices.</p></div><button id="logout" class="logout">Log out</button></div>
+<div class="stats"><div class="stat"><span class="muted">Uploaded materials</span><b id="count">—</b></div><div class="stat"><span class="muted">Latest product ID</span><b id="latest">—</b></div><div class="stat"><span class="muted">Store</span><b><a href="/store.html">View →</a></b></div></div>
+<div class="admin-grid">
+<section class="admin-panel"><h2>Add new material</h2><p class="muted">Every upload becomes its own product and gets a unique <code>?pdf=ID</code> purchase link.</p><label class="drop"><input id="file" type="file" accept=".pdf,application/pdf"><span>📄 Choose PDF</span></label><p id="filename" class="muted"></p><label>Price (₹)<input id="price" type="number" min="1" step="1" value="499"></label><button id="upload" class="buy-button">Upload &amp; Create Product</button><p id="sellerMsg" class="message" aria-live="polite"></p><section id="uploadResult" class="hidden success"><h3>✅ Product created</h3><p>Customer purchase link:</p><input id="link" class="url" readonly><button id="copy">Copy Link</button></section></section>
+<section class="admin-panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div><h2>All uploaded materials</h2><p class="muted">This list is the source of truth for all PDF purchase/download products.</p></div><button id="refresh" class="small-btn outline">↻ Refresh</button></div><div class="table-scroll"><table class="admin-table"><thead><tr><th>ID / Material</th><th>Price</th><th>Purchase URL</th><th>Replace PDF</th><th>Actions</th></tr></thead><tbody id="materials"><tr><td colspan="5" class="empty">Loading materials…</td></tr></tbody></table></div><p id="listMsg" class="message" aria-live="polite"></p></section>
+</div>
+<section class="admin-panel" style="margin-top:24px"><div style="display:flex;justify-content:space-between;align-items:center"><div><h2>🛡️ Community moderation</h2><p class="muted">Review open reports and hide content that violates the guidelines.</p></div><button id="refreshReports" class="small-btn outline">↻ Refresh reports</button></div><div class="table-scroll"><table class="admin-table"><thead><tr><th>Type</th><th>Question</th><th>Reason</th><th>Reported</th><th>Action</th></tr></thead><tbody id="reports"><tr><td colspan="5" class="empty">Loading reports…</td></tr></tbody></table></div><p id="reportMsg" class="message"></p></section></main>
 <script src="/js/admin.js"></script>
-
-</body>
-
-</html>
+<script src="/js/auth-ui.js"></script></body></html>

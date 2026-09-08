@@ -29,3 +29,25 @@ Customer: use the generated `/?pdf=ID` link.
 5. Only after verification is a temporary download token issued.
 
 This is Test Mode. Before production, add admin authentication, HTTPS, environment variables for secrets, webhook verification, persistent download-token storage, rate limits and stronger file/security controls.
+
+## Community accounts and Google sign-in
+
+TechCertHub now includes local email/password accounts, a community Q&A area, and a local/offline profanity filter. Signup does not require a paid moderation service. The filter is intentionally conservative and should be expanded as needed.
+
+### Google sign-in (optional)
+Google sign-in is free to use but requires creating a Google OAuth 2.0 Web application in Google Cloud. Set:
+
+`GOOGLE_OAUTH_ENABLED=true`
+
+`GOOGLE_CLIENT_ID=...`
+
+`GOOGLE_CLIENT_SECRET=...`
+
+For local development add this redirect URI to the Google OAuth client:
+
+`http://localhost:8080/login/oauth2/code/google`
+
+For production use your HTTPS domain with the same `/login/oauth2/code/google` path.
+
+### Community moderation
+Questions and answers are stored in H2 by default. The server checks titles, questions and answers against an offline blocklist before saving. No paid API is used. Admin moderation can be extended later with hide/report controls.

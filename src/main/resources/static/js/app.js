@@ -59,6 +59,9 @@ async function loadPdf() {
 
         console.log('PDF response:', data);
 
+        const title = document.getElementById('productTitle');
+        if (title && data.filename) title.textContent = data.filename.replace(/\.pdf$/i, '').replace(/[_-]+/g, ' ');
+
         if (!response.ok) {
             throw new Error(
                 data.error || 'Product not found.'
@@ -154,7 +157,7 @@ pay.addEventListener('click', async () => {
 
             name: 'TechCertHub',
 
-            description: 'GH-600 Mock Exam',
+            description: (document.getElementById('productTitle')?.textContent || 'TechCertHub Practice Material'),
 
             order_id: order.razorpayOrderId,
 
