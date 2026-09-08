@@ -1,0 +1,8 @@
+package com.example.pdfpay.controller;
+import com.example.pdfpay.entity.*; import com.example.pdfpay.repository.*; import org.springframework.http.*; import org.springframework.web.bind.annotation.*; import java.util.*;
+@RestController @RequestMapping("/api/community/admin") public class CommunityAdminController {
+ private final ForumPostRepository posts; private final ForumCommentRepository comments; private final ForumReportRepository reports; public CommunityAdminController(ForumPostRepository p,ForumCommentRepository c,ForumReportRepository r){posts=p;comments=c;reports=r;}
+ @GetMapping("/reports") public List<Map<String,Object>> reports(){return reports.findTop200ByStatusOrderByCreatedAtDesc("OPEN").stream().map(r->{Map<String,Object>m=new LinkedHashMap<>();m.put("id",r.getId());m.put("type",r.getComment()!=null?"ANSWER":"QUESTION");m.put("targetId",r.getComment()!=null?r.getComment().getId():r.getPost().getId());m.put("title",r.getPost()!=null?r.getPost().getTitle():r.getComment().getPost().getTitle());m.put("reason",r.getReason());m.put("createdAt",r.getCreatedAt());return m;}).toList();}
+ @PostMapping("/reports/{id}/resolve") public ResponseEntity<?> resolve(@PathVariable Long id,@RequestBody Map<String,Object> b){return reports.findById(id).map(r->{String action=String.valueOf(b.getOrDefault("action","dismiss"));if("hide".equals(action)){if(r.getPost()!=null){r.getPost().setHidden(true);posts.save(r.getPost());}if(r.getComment()!=null){r.getComment().setHidden(true);comments.save(r.getComment());}}r.setStatus("RESOLVED");reports.save(r);return ResponseEntity.ok(Map.of("message","Moderation action applied."));}).orElseGet(()->ResponseEntity.notFound().build());}
+
+}
