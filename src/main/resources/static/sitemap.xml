@@ -1,6 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://techcertshub.com/</loc></url><url><loc>https://techcertshub.com/certifications.html</loc></url><url><loc>https://techcertshub.com/learn.html</loc></url><url><loc>https://techcertshub.com/quizzes.html</loc></url><url><loc>https://techcertshub.com/store.html</loc></url><url><loc>https://techcertshub.com/exams/gh-600/</loc></url><url><loc>https://techcertshub.com/contact.html</loc></url><url><loc>https://techcertshub.com/privacy.html</loc></url><url><loc>https://techcertshub.com/terms.html</loc></url><url><loc>https://techcertshub.com/refund.html</loc></url>  <url><loc>https://techcertshub.com/about.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://techcertshub.com/disclaimer.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://techcertshub.com/editorial-policy.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://techcertshub.com/faq.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://techcertshub.com/resources.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://techcertshub.com/</loc>
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/certifications.html</loc>
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/learn.html</loc>
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/quizzes.html</loc>
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/store.html</loc>
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/exams/gh-600/</loc>
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/contact.html</loc>
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/privacy.html</loc>
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/terms.html</loc>
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/refund.html</loc>
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/about.html</loc>
+
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/disclaimer.html</loc>
+
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/editorial-policy.html</loc>
+
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/faq.html</loc>
+
+      <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
+        <loc>https://techcertshub.com/resources.html</loc>
+
+      <lastmod>2026-09-08</lastmod>
+    </url>
 </urlset>
